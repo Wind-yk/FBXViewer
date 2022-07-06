@@ -17,7 +17,44 @@
     $ git clone https://github.com/Wind-yk/3D
     ```
 
-3. The main instructions and workflow of `git`:
+3. The main instructions and workflow of `git` (information retrieved from https://git-scm.com/docs):
+
+    * To display the state of the working directory and the staging area; to see the tracked, untracked files and changes. Display the state between git add and git commit command.
+        ```
+        $ git status
+        ```
+    * To update the index (which contains a snapshot of the content of the working tree) using the current content found in the working tree and to prepare the content staged for the next commit.
+        ```
+        $ git add "file name"
+        ```
+    * To remove files from the working tree and from the index.
+        ```
+        $ git rm "file name"
+        ```
+    * To create a new commit containing the current contents of the index.
+        ```
+        $ git commit
+        // automatically commit all modified, tracked or deleted files:
+        $ git commit -a
+        // add a commit message:
+        $ git commit -m <"message">
+        ```
+    * To list existing branches; the current branch will be highlighted in green and marked with an asterisk.
+        ```
+        $ git branch
+        ```
+    * To switch branches.
+        ```
+        $ git checkout "branch name"
+        ```
+    * To show a list of all the commits made to a repository.
+        ```
+        $ git log
+        ```
+    *
+        ```
+        ```
+
 
 
 ## Build the Python environment
