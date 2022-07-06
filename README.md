@@ -44,5 +44,5 @@ conda activate 3D
 5. If you installed some new packages, remember to refresh the `environment.yaml` using:
 
 ```
-conda env export > environment.yml
+conda env export > environment.yaml
 ```
