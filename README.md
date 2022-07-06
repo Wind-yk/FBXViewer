@@ -17,13 +17,7 @@
     $ git clone https://github.com/Wind-yk/3D
     ```
 
-3. How to get the newest
-
-4. AAAA XD
-
-5. BBB
-
-6. CCC
+3. The main instructions:
 
 
 ## Build the Python environment
