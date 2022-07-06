@@ -23,6 +23,8 @@
 
 5. BBB
 
+6. CCC
+
 
 ## Build the Python environment
 
