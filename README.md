@@ -17,21 +17,21 @@
     $ git clone https://github.com/Wind-yk/3D
     ```
 
-3. The main instructions and workflow of `git` (information retrieved from https://git-scm.com/docs):
+3. The main instructions and workflow of `git` (Version Control) (information retrieved from https://git-scm.com/docs and  https://atlassian.com/git):
 
-    * To display the state of the working directory and the staging area; to see the tracked, untracked files and changes. Display the state between git add and git commit command.
+    * To display the state of the working directory and the staging area; to see the tracked, untracked files and changes. Display the state between git add and git commit command:
         ```
         $ git status
         ```
-    * To update the index (which contains a snapshot of the content of the working tree) using the current content found in the working tree and to prepare the content staged for the next commit.
+    * To update the index (which contains a snapshot of the content of the working tree) using the current content found in the working tree and to prepare the content staged for the next commit:
         ```
         $ git add "file name"
         ```
-    * To remove files from the working tree and from the index.
+    * To remove files from the working tree and from the index:
         ```
         $ git rm "file name"
         ```
-    * To create a new commit containing the current contents of the index.
+    * To create a new commit containing the current contents of the index:
         ```
         $ git commit
         // automatically commit all modified, tracked or deleted files:
@@ -39,22 +39,31 @@
         // add a commit message:
         $ git commit -m <"message">
         ```
-    * To list existing branches; the current branch will be highlighted in green and marked with an asterisk.
+    * To update remote refs along with associated objects; to publish and upload local changes to a central repository; to share the modifications with remote team members:
+        ```
+        $ git push
+        ```
+        Note: Before pushing, the user should have already done commands "add" and "commit" correctly.
+    * To list existing branches; the current branch will be highlighted in green and marked with an asterisk:
         ```
         $ git branch
         ```
-    * To switch branches.
+    * To switch branches:
         ```
         $ git checkout "branch name"
         ```
-    * To show a list of all the commits made to a repository.
+    * To show a list of all the commits made to a repository:
         ```
         $ git log
         ```
-    *
+    * To download commits, files, and refs from a remote repository into the local repositor but isolating that content from existing local content so that it has no effect on the local development work: 
         ```
+        $ git fetch
         ```
-
+    * To fetch and download content from a remote repository and immediately update the local repository to match that content:
+        ```
+        $ git pull
+        ```
 
 
 ## Build the Python environment
