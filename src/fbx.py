@@ -13,9 +13,8 @@ def fbx2json(input, output="output.json", force=False):
         if force:
             os.remove(output)
         else:
-            raise FileNotExist(f"{output} already exists!")
+            raise FileExistsError(f"{output} already exists.")
     
-
     # Complete the command with input file name
     input = "readFbxInfo.exe " + input + " >> " + output
 
