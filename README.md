@@ -81,10 +81,10 @@
 
         * How to upload a change to the central repository:
             ```
-            // (0) save the file locally; (1) add; (2) commit; (3) push
+            # (0) save the file locally; (1) add; (2) commit; (3) push
             $ git add "file name"
-            // to include a message or not is optional
-            $ git commit -m <"message">
+            # to include a message or not is optional
+            $ git commit -m <"message"> -m <"description">
             $ git push
             ```
             
