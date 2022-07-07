@@ -1,5 +1,29 @@
 # 3D
 
+## Architecture
+
+The folders and files of this project are organized as follows:
+
+```bash
+📦3D
+ ┣━📂config # configurations for scripts
+ ┃
+ ┣━📂data
+ ┃ ┣━📂ext  # external 
+ ┃ ┣━📂int  # internal
+ ┃ ┣━📂med  # intermediate
+ ┃ ┗━📂out  # output
+ ┃
+ ┣━📂src  # code
+ ┃ ┣━📂notebook
+ ┃ ┣━📂script
+ ┃ ┗━📂packages
+ ┃
+ ┣━📜README.md
+ ┣━📜.gitignore
+ ┗━📜environment.yaml
+```
+
 ## How to use git
 
 1. In case you have not configured git, follow the instructions at terminal:
