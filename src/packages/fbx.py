@@ -5,20 +5,22 @@ import os
 
 def fbx2json(input, output="output.json", force=False):
 
-    output_dir = "../../data/med/"
+    output_path = "../../data/med/"
+
+    input_path = "../../data/int/"
 
     # Change working directory
-    os.chdir("../../data/int")
+    os.chdir("../script")
 
     # If exit output.txt, we delete it
-    if os.path.exists(output_dir + output):
+    if os.path.exists(output_path + output):
         if force:
-            os.remove(output_dir + output)
+            os.remove(output_path + output)
         else:
             raise FileExistsError(f"{output} already exists.")
 
     # Complete the command with input file name
-    input = "readFbxInfo.exe " + input + " >> " + output_dir + output
+    input = "readFbxInfo.exe " + input_path + input + " >> " + output_path + output
 
     # Execute the readFbxInfo.exe
     os.system(input)
