@@ -9,8 +9,8 @@ class Point:
     >>> p1.y = 3
     >>> p1
     Point(-3.1, 2.0, 4.5)
-    >>> Point(1,2)
-    TypeError: Point.__init__() missing 1 required positional argument: 'z'
+    >>> Point(1, 2)
+    Point(1, 2, 0)
     """
 
     def __init__(self, x=0, y=0, z=0):
@@ -24,26 +24,28 @@ class Point:
     # x getter and setter
     @property
     def x(self):
-        return self.x
+        return self._x
 
     @x.setter
     def x(self, value):
-        self.x = value
+        self._x = value
    
     # y getter and setter
     @property
     def y(self):
-        return self.y
+        return self._y
 
     @y.setter
     def y(self, value):
-        self.y = value
+        self._y = value
 
     # z getter and setter
     @property
     def z(self):
-        return self.z
+        return self._z
 
     @z.setter
     def z(self, value):
-        self.z = value
+        self._z = value
+
+
