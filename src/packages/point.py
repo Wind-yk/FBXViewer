@@ -4,6 +4,9 @@ class Point:
         self.y = y
         self.z = z
     
+    def __repr__(self):
+        return [self.x, self.y, self.z]
+        
     # x getter and setter
     @property
     def x(self):
