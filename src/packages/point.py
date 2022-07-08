@@ -1,11 +1,25 @@
 class Point:
+    """
+    Represents a 3D point in space.
+    
+    # Example:
+    >>> p1 = Point( -3.1 , 2.0 , 4.5 )
+    >>> p1.x
+    -3.1
+    >>> p1.y = 3
+    >>> p1
+    Point(-3.1, 2.0, 4.5)
+    >>> Point(1,2)
+    TypeError: Point.__init__() missing 1 required positional argument: 'z'
+    """
+
     def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
         self.z = z
     
     def __repr__(self):
-        return [self.x, self.y, self.z]
+        return f"Point({self.x}, {self.y}, {self.z})"
         
     # x getter and setter
     @property
@@ -14,11 +28,7 @@ class Point:
 
     @x.setter
     def x(self, value):
-        try:
-            # check correct input
-            self.x = float(value)
-        except:
-            raise ValueError
+        self.x = value
    
     # y getter and setter
     @property
@@ -27,10 +37,7 @@ class Point:
 
     @y.setter
     def y(self, value):
-        try:
-            self.y = float(value)
-        except:
-            raise ValueError
+        self.y = value
 
     # z getter and setter
     @property
@@ -39,21 +46,4 @@ class Point:
 
     @z.setter
     def z(self, value):
-        try:
-            self.z = float(value)
-        except:
-            raise ValueError
-
-    # coordinates' getter and setter
-    def coordinates(self):
-        # return a list instead of a tuple
-        return [self.x, self.y, self.z]
-
-    @coordinates.setter
-    def coordinates(self, valuex, valuey, valuez):
-        try:
-            self.x = float(valuex)
-            self.y = float(valuey)
-            self.z = float(valuez)
-        except:
-            raise ValueError
+        self.z = value
