@@ -24,7 +24,7 @@ The folders and files of this project are organized as follows:
  ┗━📜environment.yaml
 ```
 
-![alt text](3d.jpeg)
+![alt text](3D_diagram.jpeg)
 
 ## How to use git
 
