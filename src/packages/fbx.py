@@ -10,7 +10,7 @@ def fbx2json(input, output="output.json", force=False):
     input_path = "../../data/int/"
 
     # Change working directory
-    os.chdir("../script")
+    os.chdir("src/script")
 
     # If exit output.txt, we delete it
     if os.path.exists(output_path + output):
