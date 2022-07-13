@@ -172,3 +172,7 @@ If you need to update your environment, use:
 conda env update --f environment.yaml --prune
 ```
 > You can use `--name` to specify the environment to update, as `--name 3D`, otherwise it will update your current environment. The argument `--prune` uninstalls packages that are no longer present in the yaml. 
+
+## References
+
+[FBX Format reference](https://banexdevblog.wordpress.com/2014/06/23/a-quick-tutorial-about-the-fbx-ascii-format/)
