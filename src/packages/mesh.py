@@ -12,7 +12,15 @@ class Mesh:
         self.vertices = vertices
         self.edges = edges
         self.transform_matrix = self.getTranform(center, angle, scale)
+        self.show = True
 
+    def disable(self):
+        """Hide the geometric body."""
+        self.show = False
+    
+    def enable(self):
+        """Display the geometric body."""
+        self.show = True
 
     def getTransform(self, center, angle, scale):
         """
@@ -37,5 +45,11 @@ class Mesh:
     def send2render(self, display: Display):
         """
         Send the actual geometric body to render.
+        """
+        pass
+
+    def to_fbx(self, path, force=False):
+        """
+        Save as fbx file.
         """
         pass
