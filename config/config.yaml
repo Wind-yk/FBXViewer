@@ -1,0 +1,11 @@
+
+configuration: 
+
+  name: "3D project"
+  
+  version: 0.001
+  
+  file_src: 
+    - input: ../data/int/cube2.fbx
+    - output: ../data/med/cube2.json
+
