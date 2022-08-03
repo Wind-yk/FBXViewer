@@ -48,4 +48,7 @@ class Point:
     def z(self, value):
         self._z = value
 
+    def __iter__(self):
+        return iter((self.x, self.y, self.z))
+
 
