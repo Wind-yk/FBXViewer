@@ -46,4 +46,18 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False) -> list(M
     """
     # Check if the file exists, if it is already in json. If it is not,
     # then first use fbx2json to convert it to json and read it as so.
-    pass
+
+    Mesh_list = []
+
+    output_path = "../../data/med/"
+
+    if overwrite:
+        fbx2json(fbx_path, json_path, True)
+    else:
+        if os.path.exists(output_path + json_path):
+            pass
+        else:
+            fbx2json(fbx_path, json_path)
+    # there is need of some more code
+    return Mesh_list
+
