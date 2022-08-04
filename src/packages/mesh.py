@@ -4,15 +4,17 @@ from numpy import matrix, identity, sin, cos, pi
 from packages.point import Point
 from packages.display import Display
 
+
+# TODO: add getter and setter for each point of vertices
 class Mesh:
     """
     This class will handle a geometric body and
     send it to the Display class for render.
     """
 
-    def __init__(self, vertices, edges, center, angle, scale) -> None:
+    def __init__(self, vertices: list(Point), edges: tuple, center: Point, angle: tuple, scale: tuple) -> None:
         self.vertices = vertices # matrix of shape 4×|V|
-        self.edges = edges
+        self.edges = edges       # 
         self.show = True
         
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
@@ -20,37 +22,40 @@ class Mesh:
         self._transform_matrix_backup = self.transform_matrix
 
 
-    def reset(self):
-        """Reset to the initial transformation."""
-        self.transform_matrix = self._transform_matrix_backup
+    @property
+    def vertices(self):
+        return self._vertices
+    @vertices.setter
+    def vertices(self, values): 
+        self._vertices = values
 
+    @property
+    def edges(self):
+        return self._edges
+    @edges.setter
+    def edges(self, values): 
+        self._edges = values
 
-    def disable(self):
-        """Hide the geometric body."""
-        self.show = False
+    @property
+    def show(self):
+        return self._show
+    @show.setter
+    def show(self, values): 
+        self._show = values
 
-    
-    def enable(self):
-        """Display the geometric body."""
-        self.show = True
+    @property
+    def transform_matrix(self):
+        return self._transform_matrix
+    @transform_matrix.setter
+    def transform_matrix(self, values): 
+        self._transform_matrix = values
 
-
-    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> matrix:
-        """
-        Update the tranform matrix. First shift, then rotate and at the end scale.
-        
-        # Parameters
-            - `center` (Point): for translation
-            - `angle` (list | tuple): 3-length in radians (yaw, pitch, roll)
-            - `scale` (float): for scale
-
-        https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
-        """
-        shift_matrix = self._shift(center)
-        rotation_matrix = self._rotation(angle)
-        scale_matrix = self._scale(scale)
-        
-        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
+    @property
+    def transform_matrix_backup(self):
+        return self._transform_matrix_backup
+    @transform_matrix_backup.setter
+    def transform_matrix_backup(self, values): 
+        self._transform_matrix_backup = values
 
 
     # TODO: change the assert to exception
@@ -64,11 +69,13 @@ class Mesh:
         # Output:
             - `scale_matrix` (matrix): 4×4 matrix
         """
-        assert s != 0
+        assert all(s)  # check all values are non-zero
+        
+        x, y, z = s
         scale_matrix = matrix([
-            [s, 0, 0, 0],
-            [0, s, 0, 0],
-            [0, 0, s, 0],
+            [x, 0, 0, 0],
+            [0, y, 0, 0],
+            [0, 0, z, 0],
             [0, 0, 0, 1]
         ])
         return scale_matrix
@@ -107,10 +114,9 @@ class Mesh:
 
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
+        assert all(0 <= angle < 2*pi for angle in rotation)
+        
         alfa, beta, gamma = rotation
-
-        assert 0 <= alfa < 2*pi and 0 <= beta < 2*pi and 0 <= gamma < 2*pi
-
         c_a, c_b, c_c = cos(alfa), cos(beta), cos(gamma)
         s_a, s_b, s_c = sin(alfa), sin(beta), sin(gamma)
 
@@ -130,6 +136,7 @@ class Mesh:
         display.add_mesh(self)
 
 
+    # TODO: add camera as parameter
     def to2D(self):
         """
         Return the vertices mapped to 2D.
@@ -138,9 +145,40 @@ class Mesh:
         return mapped_points[0,:], mapped_points[1,:]
     
 
-    def to_fbx(self, path: str, force: bool=False):
+    def toFBX(self, path: str, force: bool=False):
         """
         Save as fbx file.
         """
         pass
 
+
+    def reset(self):
+        """Reset to the initial transformation."""
+        self.transform_matrix = self._transform_matrix_backup
+
+
+    def disable(self):
+        """Hide the geometric body."""
+        self.show = False
+
+    
+    def enable(self):
+        """Display the geometric body."""
+        self.show = True
+
+
+    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> matrix:
+        """
+        Update the tranform matrix. First shift, then rotate and at the end scale.
+        
+        # Parameters
+            - `center` (Point): for translation
+            - `angle` (list | tuple): 3-length in radians (yaw, pitch, roll)
+            - `scale` (float): for scale
+
+        https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
+        """
+        shift_matrix = self._shift(center)
+        rotation_matrix = self._rotation(angle)
+        scale_matrix = self._scale(scale)
+        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
