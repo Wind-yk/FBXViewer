@@ -9,7 +9,7 @@ from packages.display import Display
 CONFIG_PATH = "config/config.yaml"
 
 if __name__ == '__main__':
-    config = yaml.save_load(CONFIG_PATH)
+    config = yaml.loader(CONFIG_PATH)
     list_mesh = readFBX(config["file_path"])
 
     display = Display()
