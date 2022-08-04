@@ -16,7 +16,7 @@ class Mesh:
         self.show = True
         
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
-        self.applyTranform(center, angle, scale)
+        self.applyTransform(center, angle, scale)
         self._transform_matrix_backup = self.transform_matrix
 
 
@@ -67,8 +67,8 @@ class Mesh:
         assert s != 0
         scale_matrix = matrix([
             [s, 0, 0, 0],
-            [0, s, 0, 0]
-            [0, 0, s, 0]
+            [0, s, 0, 0],
+            [0, 0, s, 0],
             [0, 0, 0, 1]
         ])
         return scale_matrix
