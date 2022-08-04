@@ -17,6 +17,12 @@ class Mesh:
         
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
         self.applyTranform(center, angle, scale)
+        self._transform_matrix_backup = self.transform_matrix
+
+
+    def reset(self):
+        """Reset to the initial transformation."""
+        self.transform_matrix = self._transform_matrix_backup
 
 
     def disable(self):
@@ -33,7 +39,7 @@ class Mesh:
         """
         Update the tranform matrix. First shift, then rotate and at the end scale.
         
-        # Params:
+        # Parameters
             - `center` (Point): for translation
             - `angle` (list | tuple): 3-length in radians (yaw, pitch, roll)
             - `scale` (float): for scale
@@ -44,10 +50,20 @@ class Mesh:
         rotation_matrix = self._rotation(angle)
         scale_matrix = self._scale(scale)
         
-        return scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
+        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
 
 
+    # TODO: change the assert to exception
     def _scale(self, s: float):
+        """
+        Get the matrix that multiplies all the components by a factor of `s`.
+
+        # Parameters
+            - `s` (float): factor of product
+
+        # Output:
+            - `scale_matrix` (matrix): 4×4 matrix
+        """
         assert s != 0
         scale_matrix = matrix([
             [s, 0, 0, 0],
@@ -59,6 +75,15 @@ class Mesh:
 
 
     def _shift(self, shift: Point):
+        """
+        Get the matrix that shifts all components by the vector `shift`.
+
+        # Parameters
+            - `shift` (Point): represents the vector of shift.
+        
+        # Output:
+            - `shift_matrix` (matrix): 4×4 matrix
+        """
         x, y, z = shift
         shift_matrix = matrix([
             [1, 0, 0, x],
@@ -69,8 +94,17 @@ class Mesh:
         return shift_matrix
 
 
+    # TODO: change the assert to exception
     def _rotation(self, rotation: list|tuple):
         """
+        Get the matrix for the rotation.
+
+        # Parameters
+            - `rotation` (list|tuple): list-like of (yaw, pitch, roll).
+
+        # Returns
+            - `rotation_matrix` (matrix): 4×4 matrix
+
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
         alfa, beta, gamma = rotation
