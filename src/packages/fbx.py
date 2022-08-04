@@ -12,21 +12,18 @@ def fbx2json(input:str, output:str, force:bool=False):
     Converts a FBX file to json, using external C++ package.
     """
 
-    output_path = "../../data/med/"
-    input_path = "../../data/int/"
-
     # Change working directory
     os.chdir("src/script")
 
     # If exit output.txt, we delete it
-    if os.path.exists(output_path + output):
+    if os.path.exists(output):
         if force:
-            os.remove(output_path + output)
+            os.remove(output)
         else:
             raise FileExistsError(f"{output} already exists.")
 
     # Complete the command with input file name
-    input = "readFbxInfo.exe " + input_path + input + " >> " + output_path + output
+    input = "readFbxInfo.exe " + input + " >> " + output
 
     # Execute the readFbxInfo.exe
     os.system(input)
@@ -56,7 +53,7 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     fbx2json(fbx_path, json_path, overwrite)
     
     # Open the created json file for data
-    with open("../../data/med/"+json_path, 'r') as file:
+    with open("../"+json_path, 'r') as file:
         data = json.load(file)
 
     # For each "Geometry" create a Mesh with its respective "Model"

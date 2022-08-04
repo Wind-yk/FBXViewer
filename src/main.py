@@ -12,7 +12,7 @@ CONFIG_PATH = "config/config.yaml"
 if __name__ == '__main__':
     with open(CONFIG_PATH) as f:
         config = yaml.load(f, Loader=SafeLoader)
-    list_mesh = readFBX(config["file_path"])
+    list_mesh = readFBX(config['configuration']['file_src']['input'], config['configuration']['file_src']['output'])
 
     display = Display()
     for mesh in list_mesh:

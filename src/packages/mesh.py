@@ -1,8 +1,8 @@
 from numpy import matrix, identity, sin, cos, pi
 
 # Project packages
-from src.packages.point import Point
-from src.packages.display import Display
+from packages.point import Point
+from packages.display import Display
 
 class Mesh:
     """
