@@ -1,18 +1,19 @@
-from numpy import matrix, identity, sin, cos, pi
+from math import isclose
+from numpy import matrix, identity, sin, cos, pi, asmatrix
 
 # Project packages
 from packages.point import Point
 from packages.display import Display
 
 
-# TODO: add getter and setter for each point of vertices
+# TODO: add setter for each point of vertices
 class Mesh:
     """
     This class will handle a geometric body and
     send it to the Display class for render.
     """
-
-    def __init__(self, vertices: list(Point), edges: tuple, center: Point, angle: tuple, scale: tuple) -> None:
+    # ------------------------- internal methods ------------------------- #
+    def __init__(self, vertices: list[Point], edges: list, center: Point, angle: list[float], scale: list[float]):
         self.vertices = vertices # matrix of shape 4×|V|
         self.edges = edges       # 
         self.show = True
@@ -22,44 +23,8 @@ class Mesh:
         self._transform_matrix_backup = self.transform_matrix
 
 
-    @property
-    def vertices(self):
-        return self._vertices
-    @vertices.setter
-    def vertices(self, values): 
-        self._vertices = values
-
-    @property
-    def edges(self):
-        return self._edges
-    @edges.setter
-    def edges(self, values): 
-        self._edges = values
-
-    @property
-    def show(self):
-        return self._show
-    @show.setter
-    def show(self, values): 
-        self._show = values
-
-    @property
-    def transform_matrix(self):
-        return self._transform_matrix
-    @transform_matrix.setter
-    def transform_matrix(self, values): 
-        self._transform_matrix = values
-
-    @property
-    def transform_matrix_backup(self):
-        return self._transform_matrix_backup
-    @transform_matrix_backup.setter
-    def transform_matrix_backup(self, values): 
-        self._transform_matrix_backup = values
-
-
     # TODO: change the assert to exception
-    def _scale(self, s: float):
+    def _scale(self, scale: list[float]|float) -> matrix:
         """
         Get the matrix that multiplies all the components by a factor of `s`.
 
@@ -69,9 +34,13 @@ class Mesh:
         # Output:
             - `scale_matrix` (matrix): 4×4 matrix
         """
-        assert all(s)  # check all values are non-zero
+        if isinstance(scale, (tuple, list)):
+            assert all(scale)  # check all values are non-zero
+            x, y, z = scale
+        elif isinstance(scale, (float, int)):
+            assert not isclose(scale, 0)
+            x = y = z = scale
         
-        x, y, z = s
         scale_matrix = matrix([
             [x, 0, 0, 0],
             [0, y, 0, 0],
@@ -81,7 +50,7 @@ class Mesh:
         return scale_matrix
 
 
-    def _shift(self, shift: Point):
+    def _shift(self, shift: Point) -> matrix:
         """
         Get the matrix that shifts all components by the vector `shift`.
 
@@ -102,7 +71,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _rotation(self, rotation: list or tuple):
+    def _rotation(self, rotation: list or tuple) -> matrix:
         """
         Get the matrix for the rotation.
 
@@ -128,8 +97,72 @@ class Mesh:
         ])
         return rotation_matrix
 
+    # ------------------------- properties ------------------------- # 
+    @property
+    def vertices(self):
+        return self._vertices
 
-    def send2render(self, display: Display):
+
+    # TODO: change assert to exception
+    # TODO: change the all equal to 1 -> allclose
+    @vertices.setter
+    def vertices(self, values):
+        if not isinstance(values, matrix):
+            values = asmatrix(values)
+
+        if values.shape[0] != 4:         # check if the input is inverted
+            assert values.shape[1] == 4  # ensure that it will have 4 rows
+            values = values.T
+
+        if not (values[3,:] == 1).all():
+            assert values.shape[1] == 4  # ensure that it will have 4 rows
+            values = values.T
+
+        self._vertices = values
+
+
+    @property
+    def edges(self):
+        return self._edges
+
+
+    @edges.setter
+    def edges(self, values): 
+        self._edges = values
+
+
+    @property
+    def show(self):
+        return self._show
+
+
+    @show.setter
+    def show(self, values): 
+        self._show = values
+
+
+    @property
+    def transform_matrix(self):
+        return self._transform_matrix
+
+
+    @transform_matrix.setter
+    def transform_matrix(self, values): 
+        self._transform_matrix = values
+
+
+    @property
+    def transform_matrix_backup(self):
+        return self._transform_matrix_backup
+
+
+    @transform_matrix_backup.setter
+    def transform_matrix_backup(self, values): 
+        self._transform_matrix_backup = values
+
+
+    # ------------------------- methods ------------------------- #
+    def send2render(self, display: Display) -> None:
         """
         Send the actual geometric body to render.
         """
@@ -137,12 +170,12 @@ class Mesh:
 
 
     # TODO: add camera as parameter
-    def to2D(self):
+    def to2D(self) -> tuple[matrix]:
         """
         Return the vertices mapped to 2D.
         """
         mapped_points = self.transform_matrix @ self.vertices
-        return mapped_points[0,:], mapped_points[1,:]
+        return mapped_points[:2,:]
     
 
     def toFBX(self, path: str, force: bool=False):
@@ -151,23 +184,38 @@ class Mesh:
         """
         pass
 
+    
+    # TODO: change assert to exception
+    # TODO: dynamic mapped point instead of calculating on-line
+    def get2DVertex(self, i):
+        """Given index `i`, return the `i`th mapped point."""
+        assert isinstance(i, int)
+        return self.to2D()[:,i]
 
-    def reset(self):
+
+    # TODO: change assert to exception
+    def getVertex(self, i):
+        """Given index `i`, return the i'th vertex."""
+        assert isinstance(i, int)
+        return self.vertices[:,i]
+
+
+    def reset(self) -> None:
         """Reset to the initial transformation."""
-        self.transform_matrix = self._transform_matrix_backup
+        self.transform_matrix = self.transform_matrix_backup
 
 
-    def disable(self):
+    def disable(self) -> None:
         """Hide the geometric body."""
         self.show = False
 
     
-    def enable(self):
+    def enable(self) -> None:
         """Display the geometric body."""
         self.show = True
 
 
-    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> matrix:
+    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> None:
         """
         Update the tranform matrix. First shift, then rotate and at the end scale.
         
