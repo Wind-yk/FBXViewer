@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Project packages
-from packages.fbx import readFBX
+#from packages.fbx import readFBX
 from packages.display import Display
 from packages.mesh import Mesh
 
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     
     display = Display()
 
-    vertices = [[0,0,0],[1,0,0],[1,1,0],[0,1,0]]
+    vertices = [[0,0,0,1],[1,0,0,1],[1,1,0,1],[0,1,0,1]]
 
     edges = [ [0,1],[1,2],[2,3],[3,0]]
 
@@ -28,8 +28,9 @@ if __name__ == '__main__':
 
     angle = [0,0,0]
 
-    scale = [0,0,0]
-
+    #scale = [0,0,0]
+    scale = 1
+    
     m = Mesh(vertices,edges,center,angle,scale)
 
     m.send2render(display)
