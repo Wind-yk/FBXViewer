@@ -1,4 +1,5 @@
 import yaml
+from yaml.loader import SafeLoader
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -9,7 +10,8 @@ from packages.display import Display
 CONFIG_PATH = "config/config.yaml"
 
 if __name__ == '__main__':
-    config = yaml.loader(CONFIG_PATH)
+    with open(CONFIG_PATH) as f:
+        config = yaml.load(f, Loader=SafeLoader)
     list_mesh = readFBX(config["file_path"])
 
     display = Display()
