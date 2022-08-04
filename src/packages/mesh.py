@@ -35,7 +35,7 @@ class Mesh:
         self.show = True
 
 
-    def applyTransform(self, center: Point=Point(0,0,0), angle: list|tuple=(0,0,0), scale: float=1.) -> matrix:
+    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> matrix:
         """
         Update the tranform matrix. First shift, then rotate and at the end scale.
         
@@ -95,7 +95,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _rotation(self, rotation: list|tuple):
+    def _rotation(self, rotation: list or tuple):
         """
         Get the matrix for the rotation.
 
