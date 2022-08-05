@@ -61,36 +61,59 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     # Assign predetermined values for center, angle, scale
     center = [0, 0, 0]
     angle = [0, 0, 0]
-    scale = []
+    scale = [1, 1, 1]
 
     for i,v in enumerate(data['children'][8]['children']):
+        # create the list of mesh according to the number of geometries there are
         if v['name']=="Geometry":
             vertices = v['children'][2]['properties'][0]['value']
-            edges = v['children'][4]['properties'][0]['value']
-            new_mesh = Mesh(vertices, edges, center, angle, scale)
+            vertices_points = []
+            point = []
+            for idx in range(len(vertices)):
+                point.append(vertices[idx])
+                if idx%3==2:
+                    vertices_points.append(point)
+                    point = []
+            
+            vertices_points = [[*v, 1.0] for v in vertices_points]
+
+            edges = v['children'][3]['properties'][0]['value']
+            new_mesh = Mesh(vertices_points, edges, center, angle, scale)
             mesh_list.append(new_mesh)
 
+        # fill up the information in each mesh acording to its respective model
         elif v['name']=="Model":
-            
             for i2, v2 in enumerate(v['children'][1]['children']):
-                if v2['properties'][0]['value'] == "Lcl Translation":
-                    center = []
-                    for idx in range(4, 7):
-                        center.append(v2['properties'][idx]['value'])
-                elif v2['properties'][0]['value'] == "Lcl Rotation":
-                    angle = []
-                    for idx in range(4, 7):
-                        angle.append(math.radians(v2['properties'][idx]['value']))
-                elif v2['properties'][0]['value'][0] == "Lcl Scaling":
-                    for idx in range(4, 7):
-                        scale.append(v2['properties'][idx]['value']/100)
+                if i2<=2:
+                    # try except to avoid errors when empty data
+                    try:
+                        if v2['properties'][0]['value'] == "Lcl Translation":
+                            center = []
+                            for idx in range(4, 7):
+                                center.append(v2['properties'][idx]['value'])
+                        elif v2['properties'][0]['value'] == "Lcl Rotation":
+                            angle = []
+                            for idx in range(4, 7):
+                                angle.append(math.radians(v2['properties'][idx]['value']))
+                            
+                        elif v2['properties'][0]['value'] == "Lcl Scaling":
+                            scale = []
+                            for idx in range(4, 7):
+                                scale.append(v2['properties'][idx]['value']/100)
+                    except:
+                        pass
             
             # assume there are getters and setters for vertices and edges
             mesh_list[counter] = Mesh(mesh_list[counter].vertices, mesh_list[counter].edges, center, angle, scale)
             center = [0, 0, 0]
             angle = [0, 0, 0]
-            scale = []
+            scale = [1, 1, 1]
+            print(mesh_list[counter].vertices)
+            print(mesh_list[counter].edges)
             counter+=1
+
+
+
 
     return mesh_list
 
