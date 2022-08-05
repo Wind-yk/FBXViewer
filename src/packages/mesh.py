@@ -13,7 +13,7 @@ class Mesh:
     send it to the Display class for render.
     """
     # ------------------------- internal methods ------------------------- #
-    def __init__(self, vertices: list[Point], edges: list, center: Point, angle: list[float], scale: list[float]):
+    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]'):
         self.vertices = vertices # matrix of shape 4×|V|
         self.edges = edges       # 
         self.show = True
@@ -24,7 +24,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _scale(self, scale: list[float]|float) -> matrix:
+    def _scale(self, scale: 'list[float]' or 'float') -> matrix:
         """
         Get the matrix that multiplies all the components by a factor of `s`.
 
@@ -170,7 +170,7 @@ class Mesh:
 
 
     # TODO: add camera as parameter
-    def to2D(self) -> tuple[matrix]:
+    def to2D(self) -> 'tuple[matrix]':
         """
         Return the vertices mapped to 2D.
         """

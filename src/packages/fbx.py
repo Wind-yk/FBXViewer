@@ -57,52 +57,40 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
         data = json.load(file)
 
     # For each "Geometry" create a Mesh with its respective "Model"
-    for i,v in enumerate(data['children'][8]['children'][0]['Geometry']):
-        vertices = v['children'][2]['properties'][0]['value']
-        edges = v['children'][4]['properties'][0]['value']
-        # Assign predetermined values for center, angle, scale
-        center = [0, 0, 0]
-        angle = [0, 0, 0]
-        scale = []
+    counter = 0
+    # Assign predetermined values for center, angle, scale
+    center = [0, 0, 0]
+    angle = [0, 0, 0]
+    scale = []
 
-        try: 
-            for i2, v2 in enumerate(data['children'][8]['children']['Model'][i]['children'][1]['children']):
-                if v2['properties'][0]['value'][0] == "Lcl Translation":
+    for i,v in enumerate(data['children'][8]['children']):
+        if v['name']=="Geometry":
+            vertices = v['children'][2]['properties'][0]['value']
+            edges = v['children'][4]['properties'][0]['value']
+            new_mesh = Mesh(vertices, edges, center, angle, scale)
+            mesh_list.append(new_mesh)
+
+        elif v['name']=="Model":
+            
+            for i2, v2 in enumerate(v['children'][1]['children']):
+                if v2['properties'][0]['value'] == "Lcl Translation":
                     center = []
                     for idx in range(4, 7):
                         center.append(v2['properties'][idx]['value'])
-                elif v2['properties'][0]['value'][0] == "Lcl Rotation":
+                elif v2['properties'][0]['value'] == "Lcl Rotation":
                     angle = []
                     for idx in range(4, 7):
                         angle.append(math.radians(v2['properties'][idx]['value']))
                 elif v2['properties'][0]['value'][0] == "Lcl Scaling":
                     for idx in range(4, 7):
                         scale.append(v2['properties'][idx]['value']/100)
-        except:
-            pass    # Is try except necessary?
-
-
-        # try: 
-        #     for i2, v2 in enumerate(data['children'][8]['children']['Model'][i]['children'][1]['children']):
-        #         if v2['properties'][0]['value'][0] == "Lcl Translation":
-        #             center = []
-        #             for idx in range(7):
-        #                 if v2['properties'][idx]['type'] == "D":
-        #                     center.append(v2['properties'][idx]['value'])
-        #         elif v2['properties'][0]['value'][0] == "Lcl Rotation":
-        #             angle = []
-        #             for idx in range(7):
-        #                 if v2['properties'][idx]['type'] == "D":
-        #                     angle.append(math.radians(v2['properties'][idx]['value']))
-        #         elif v2['properties'][0]['value'][0] == "Lcl Scaling":
-        #             for idx in range(7):
-        #                 if v2['properties'][idx]['type'] == "D":
-        #                     scale.append(v2['properties'][idx]['value']/100)
-        # except:
-        #     pass
-        
-        new_mesh = Mesh(vertices, edges, center, angle, scale)
-        mesh_list.append(new_mesh)
+            
+            # assume there are getters and setters for vertices and edges
+            mesh_list[counter] = Mesh(mesh_list[counter].vertices, mesh_list[counter].edges, center, angle, scale)
+            center = [0, 0, 0]
+            angle = [0, 0, 0]
+            scale = []
+            counter+=1
 
     return mesh_list
 
