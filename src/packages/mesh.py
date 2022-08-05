@@ -21,6 +21,9 @@ class Mesh:
         
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
         self.applyTransform(center, angle, scale)
+        self.center = center
+        self.angle = angle
+        self.scale = scale
         self._transform_matrix_backup = self.transform_matrix
 
         self.color = color
@@ -55,6 +58,9 @@ class Mesh:
         elif isinstance(scale, (float, int)):
             assert not isclose(scale, 0)
             x = y = z = scale
+        else:
+            raise TypeError("Invalid scale.")
+
         
         scale_matrix = matrix([
             [x, 0, 0, 0],
@@ -62,6 +68,7 @@ class Mesh:
             [0, 0, z, 0],
             [0, 0, 0, 1]
         ])
+        self.scale = [x, y, z]
         return scale_matrix
 
 
@@ -82,6 +89,7 @@ class Mesh:
             [0, 0, 1, z],
             [0, 0, 0, 1]
         ])
+        self.shift = shift
         return shift_matrix
 
 
@@ -99,7 +107,7 @@ class Mesh:
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
         assert all(-2*pi <= angle < 2*pi for angle in rotation)
-        
+
         alfa, beta, gamma = rotation
         c_a, c_b, c_c = cos(alfa), cos(beta), cos(gamma)
         s_a, s_b, s_c = sin(alfa), sin(beta), sin(gamma)
@@ -110,6 +118,8 @@ class Mesh:
             [   -s_b,               s_a*c_b,               c_a*c_b, 0],
             [      0,                     0,                     0, 1]
         ])
+
+        self.angle = rotation
         return rotation_matrix
 
     # ------------------------- properties ------------------------- # 
@@ -144,6 +154,36 @@ class Mesh:
     @edges.setter
     def edges(self, values): 
         self._edges = values
+
+    
+    @property
+    def center(self):
+        return self._edges
+
+
+    @center.setter
+    def center(self, values): 
+        self._center += values
+
+    
+    @property
+    def angle(self):
+        return self._angle
+
+
+    @angle.setter
+    def angle(self, values):
+        self._angle += values
+
+    
+    @property
+    def scale(self):
+        return self._scale
+
+
+    @scale.setter
+    def scale(self, values):
+        self._scale = [v*s for v,s in zip(values, self._scale)]
 
 
     @property
