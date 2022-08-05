@@ -14,10 +14,10 @@ if __name__ == '__main__':
     
     
     with open(CONFIG_PATH) as f:
-        config = yaml.load(f, Loader=SafeLoader)
-    list_mesh = readFBX(config['configuration']['file_src']['input'], config['configuration']['file_src']['output'])
-    
-    
+        config = yaml.load(f, Loader=SafeLoader)["configuration"]
+    list_mesh = readFBX(**config['readFBX'])
+
+
     display = Display()
 
     vertices = [[0,0,0,1],[1,0,0,1],[1,1,0,1],[0,1,0,1]]
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     #scale = [0,0,0]
     scale = 1
-    
+
     m = Mesh(vertices,edges,center,angle,scale)
 
     m.send2render(display)

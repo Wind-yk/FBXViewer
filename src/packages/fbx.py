@@ -24,7 +24,6 @@ def fbx2json(input:str, output:str, force:bool=False):
 
     # Complete the command with input file name
     input = "readFbxInfo.exe " + input + " >> " + output
-
     # Execute the readFbxInfo.exe
     os.system(input)
 
@@ -50,13 +49,15 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     mesh_list = []
 
     # Convert fbx file to json
-    fbx2json(fbx_path, json_path, overwrite)
-    
+    try:
+        fbx2json(fbx_path, json_path, overwrite)
+    except FileExistsError as e:
+        print(e)
+
     # Open the created json file for data
-    with open("../"+json_path, 'r') as file:
+    with open(json_path, 'r') as file:
         data = json.load(file)
 
-    # For each "Geometry" create a Mesh with its respective "Model"
     counter = 0
     # Assign predetermined values for center, angle, scale
     center = [0, 0, 0]
@@ -64,8 +65,8 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     scale = [1, 1, 1]
 
     for i,v in enumerate(data['children'][8]['children']):
-        # create the list of mesh according to the number of geometries there are
-        if v['name']=="Geometry":
+        # Create the list of mesh according to the number of geometries there are
+        if v['name'] == "Geometry":
             vertices = v['children'][2]['properties'][0]['value']
             vertices = [vertices[i:i+3] for i in range(0, len(vertices), 3)]
             vertices = [[*v, 1.0] for v in vertices]
@@ -73,34 +74,31 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
             new_mesh = Mesh(vertices, edges, center, angle, scale)
             mesh_list.append(new_mesh)
 
-        # fill up the information in each mesh acording to its respective model
-        elif v['name']=="Model":
+        # Fill up the information in each mesh acording to its respective model
+        elif v['name'] == "Model":
             for i2, v2 in enumerate(v['children'][1]['children']):
-                if i2<=2:
-                    # try except to avoid errors when empty data
-                    try:
-                        if v2['properties'][0]['value'] == "Lcl Translation":
-                            center = []
-                            for idx in range(4, 7):
-                                center.append(v2['properties'][idx]['value'])
-                        elif v2['properties'][0]['value'] == "Lcl Rotation":
-                            angle = []
-                            for idx in range(4, 7):
-                                angle.append(math.radians(v2['properties'][idx]['value']))
-                            
-                        elif v2['properties'][0]['value'] == "Lcl Scaling":
-                            scale = []
-                            for idx in range(4, 7):
-                                scale.append(v2['properties'][idx]['value']/100)
-                    except:
-                        pass
+                # Necessary information is allocated at most at ['children'][2]
+                if i2 <= 2:
+                    # Reminder: there will not always be data about Translation or Rotation, but we assume that there will always be Scaling info
+                    if v2['properties'][0]['value'] == "Lcl Translation":
+                        center = []
+                        for idx in range(4, 7):
+                            center.append(v2['properties'][idx]['value'])
+                    elif v2['properties'][0]['value'] == "Lcl Rotation":
+                        angle = []
+                        for idx in range(4, 7):
+                            # Convert angles to radians
+                            angle.append(math.radians(v2['properties'][idx]['value']))
+                    elif v2['properties'][0]['value'] == "Lcl Scaling":
+                        scale = []
+                        for idx in range(4, 7):
+                            # Convert percentage to scale
+                            scale.append(v2['properties'][idx]['value']/100)
             
-            # assume there are getters and setters for vertices and edges
             mesh_list[counter] = Mesh(mesh_list[counter].vertices, mesh_list[counter].edges, center, angle, scale)
             center = [0, 0, 0]
             angle = [0, 0, 0]
-            scale = [1, 1, 1]
-            counter+=1
+            counter += 1
 
     return mesh_list
 
