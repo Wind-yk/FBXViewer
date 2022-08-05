@@ -176,3 +176,5 @@ conda env update --f environment.yaml --prune
 ## References
 
 [FBX Format reference](https://banexdevblog.wordpress.com/2014/06/23/a-quick-tutorial-about-the-fbx-ascii-format/)
+
+[FBX Format reference 1](https://web.archive.org/web/20160605023014/https://wiki.blender.org/index.php/User:Mont29/Foundation/FBX_File_Structure)

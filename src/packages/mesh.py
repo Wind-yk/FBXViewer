@@ -85,7 +85,7 @@ class Mesh:
 
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
-        assert all(0 <= angle < 2*pi for angle in rotation)
+        assert all(-2*pi <= angle < 2*pi for angle in rotation)
         
         alfa, beta, gamma = rotation
         c_a, c_b, c_c = cos(alfa), cos(beta), cos(gamma)
