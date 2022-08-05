@@ -13,7 +13,7 @@ class Mesh:
     send it to the Display class for render.
     """
     # ------------------------- internal methods ------------------------- #
-    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]'):
+    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]', color='lightblue'):
         self.vertices = vertices # matrix of shape 4×|V|
         self.edges = edges       # 
         self.show = True
@@ -21,6 +21,8 @@ class Mesh:
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
         self.applyTransform(center, angle, scale)
         self._transform_matrix_backup = self.transform_matrix
+
+        self.color = color
 
 
     # TODO: change the assert to exception
@@ -159,6 +161,14 @@ class Mesh:
     @transform_matrix_backup.setter
     def transform_matrix_backup(self, values): 
         self._transform_matrix_backup = values
+
+    @property
+    def color(self):
+        return self._color
+
+    @color.setter
+    def color(self, value):
+        self._color = value
 
 
     # ------------------------- methods ------------------------- #
