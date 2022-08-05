@@ -67,18 +67,10 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
         # create the list of mesh according to the number of geometries there are
         if v['name']=="Geometry":
             vertices = v['children'][2]['properties'][0]['value']
-            vertices_points = []
-            point = []
-            for idx in range(len(vertices)):
-                point.append(vertices[idx])
-                if idx%3==2:
-                    vertices_points.append(point)
-                    point = []
-            
-            vertices_points = [[*v, 1.0] for v in vertices_points]
-
+            vertices = [vertices[i:i+3] for i in range(0, len(vertices), 3)]
+            vertices = [[*v, 1.0] for v in vertices]
             edges = v['children'][3]['properties'][0]['value']
-            new_mesh = Mesh(vertices_points, edges, center, angle, scale)
+            new_mesh = Mesh(vertices, edges, center, angle, scale)
             mesh_list.append(new_mesh)
 
         # fill up the information in each mesh acording to its respective model
@@ -108,12 +100,7 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
             center = [0, 0, 0]
             angle = [0, 0, 0]
             scale = [1, 1, 1]
-            print(mesh_list[counter].vertices)
-            print(mesh_list[counter].edges)
             counter+=1
-
-
-
 
     return mesh_list
 
