@@ -1,5 +1,6 @@
 from math import isclose
 from numpy import matrix, identity, sin, cos, pi, asmatrix
+from numpy.linalg import inv
 
 # Project packages
 from packages.point import Point
@@ -24,6 +25,18 @@ class Mesh:
 
         self.color = color
 
+        self.camera = matrix([
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 5],
+            [0, 0, 0, 1]
+        ])
+
+        self.focal = matrix([
+            [1, 0, 0, 0], # f 0 0 0
+            [0, 1, 0, 0], # 0 f 0 0
+            [0, 0, 1, 0], # 0 0 1 0
+        ])
 
     # TODO: change the assert to exception
     def _scale(self, scale: 'list[float]' or 'float') -> matrix:
@@ -184,8 +197,8 @@ class Mesh:
         """
         Return the vertices mapped to 2D.
         """
-        mapped_points = self.transform_matrix @ self.vertices
-        return mapped_points[:2,:]
+        mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
+        print(mapped_points[:2, :])
     
 
     def toFBX(self, path: str, force: bool=False):
