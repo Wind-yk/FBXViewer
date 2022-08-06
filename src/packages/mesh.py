@@ -14,35 +14,36 @@ class Mesh:
     send it to the Display class for render.
     """
     # ------------------------- internal methods ------------------------- #
-    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]', color='lightblue'):
+    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]', color='black'):
         self.vertices = vertices # matrix of shape 4×|V|
         self.edges = edges       # 
+        self.center = center
+        self.angle = angle
+        self.scale = scale
+
         self.show = True
         
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
         self.applyTransform(center, angle, scale)
-        self.center = center
-        self.angle = angle
-        self.scale = scale
         self._transform_matrix_backup = self.transform_matrix
 
         self.color = color
 
         self.camera = matrix([
-            [1, 0, 0, 0],
-            [0, 1, 0, 0],
+            [1, .5, 0, 3],
+            [0, .5, 0, 4],
             [0, 0, 1, 5],
             [0, 0, 0, 1]
         ])
 
         self.focal = matrix([
-            [1, 0, 0, 0], # f 0 0 0
-            [0, 1, 0, 0], # 0 f 0 0
+            [2, 0, 0, 0], # f 0 0 0
+            [0, 2, 0, 0], # 0 f 0 0
             [0, 0, 1, 0], # 0 0 1 0
         ])
 
     # TODO: change the assert to exception
-    def _scale(self, scale: 'list[float]' or 'float') -> matrix:
+    def _scale_matrix(self, scale: 'list[float]' or 'float') -> matrix:
         """
         Get the matrix that multiplies all the components by a factor of `s`.
 
@@ -72,7 +73,7 @@ class Mesh:
         return scale_matrix
 
 
-    def _shift(self, shift: Point) -> matrix:
+    def _shift_matrix(self, shift: Point) -> matrix:
         """
         Get the matrix that shifts all components by the vector `shift`.
 
@@ -94,7 +95,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _rotation(self, rotation: list or tuple) -> matrix:
+    def _rotation_matrix(self, rotation: list or tuple) -> matrix:
         """
         Get the matrix for the rotation.
 
@@ -162,8 +163,8 @@ class Mesh:
 
 
     @center.setter
-    def center(self, values): 
-        self._center += values
+    def center(self, center): 
+        self._center = center
 
     
     @property
@@ -172,8 +173,8 @@ class Mesh:
 
 
     @angle.setter
-    def angle(self, values):
-        self._angle += values
+    def angle(self, angle):
+        self._angle = angle
 
     
     @property
@@ -182,8 +183,8 @@ class Mesh:
 
 
     @scale.setter
-    def scale(self, values):
-        self._scale = [v*s for v,s in zip(values, self._scale)]
+    def scale(self, scale):
+        self._scale = scale # [v*s for v,s in zip(values, self._scale)]
 
 
     @property
@@ -238,8 +239,8 @@ class Mesh:
         Return the vertices mapped to 2D.
         """
         mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
-        print(mapped_points[:2, :])
-    
+        # print(mapped_points[:2, :])
+        return mapped_points[:2, :]
 
     def toFBX(self, path: str, force: bool=False):
         """
@@ -289,7 +290,8 @@ class Mesh:
 
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
-        shift_matrix = self._shift(center)
-        rotation_matrix = self._rotation(angle)
-        scale_matrix = self._scale(scale)
+        shift_matrix = self._shift_matrix(center)
+        rotation_matrix = self._rotation_matrix(angle)
+        scale_matrix = self._scale_matrix(scale)
         self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
+
