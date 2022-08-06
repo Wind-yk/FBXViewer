@@ -1,5 +1,5 @@
 from math import isclose
-from numpy import matrix, identity, sin, cos, pi, asmatrix
+from numpy import matrix, identity, sin, cos, pi, asmatrix, sqrt
 from numpy.linalg import inv
 
 # Project packages
@@ -14,33 +14,33 @@ class Mesh:
     send it to the Display class for render.
     """
     # ------------------------- internal methods ------------------------- #
-    def __init__(self, vertices: 'list[Point]', edges: list, center: Point, angle: 'list[float]', scale: 'list[float]', color='black'):
+    def __init__(self, vertices: 'list[Point]', edges: 'list[float]', center: Point, angle: 'list[float]', scale: 'list[float]', color='b'):
         self.vertices = vertices # matrix of shape 4×|V|
         self.edges = edges       # 
         self.center = center
         self.angle = angle
         self.scale = scale
 
-        self.show = True
-        
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
-        self.applyTransform(center, angle, scale)
-        self._transform_matrix_backup = self.transform_matrix
-
-        self.color = color
-
+        temp = sqrt(2)/2
         self.camera = matrix([
-            [1, .5, 0, 3],
-            [0, .5, 0, 4],
-            [0, 0, 1, 5],
-            [0, 0, 0, 1]
+            [ temp, temp, 0, 1],
+            [-temp, temp, 0, 0],
+            [    0,    0, 1, 0],
+            [    0,    0, 0, 1]
         ])
 
         self.focal = matrix([
-            [2, 0, 0, 0], # f 0 0 0
-            [0, 2, 0, 0], # 0 f 0 0
+            [5, 0, 0, 0], # f 0 0 0
+            [0, 5, 0, 0], # 0 f 0 0
             [0, 0, 1, 0], # 0 0 1 0
         ])
+        self.applyTransform(center, angle, scale)
+        self._transform_matrix_backup = self.transform_matrix
+
+        self.show = True
+        self.color = color
+
 
     # TODO: change the assert to exception
     def _scale_matrix(self, scale: 'list[float]' or 'float') -> matrix:
@@ -61,7 +61,6 @@ class Mesh:
             x = y = z = scale
         else:
             raise TypeError("Invalid scale.")
-
         
         scale_matrix = matrix([
             [x, 0, 0, 0],
@@ -123,10 +122,24 @@ class Mesh:
         self.angle = rotation
         return rotation_matrix
 
+
+    # TODO: add camera as parameter
+    def _to2D(self) -> 'tuple[matrix]':
+        """
+        Return the vertices mapped to 2D.
+        """
+        mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
+        print("Mapped points")
+        print(mapped_points)
+        return mapped_points[:2, :] / mapped_points[2,:]
+
+
     # ------------------------- properties ------------------------- # 
     @property
     def vertices(self):
         return self._vertices
+
+
 
 
     # TODO: change assert to exception
@@ -135,6 +148,8 @@ class Mesh:
     def vertices(self, values):
         if not isinstance(values, matrix):
             values = asmatrix(values)
+
+
 
         if values.shape[0] != 4:         # check if the input is inverted
             assert values.shape[1] == 4  # ensure that it will have 4 rows
@@ -196,7 +211,6 @@ class Mesh:
     def show(self, values): 
         self._show = values
 
-
     @property
     def transform_matrix(self):
         return self._transform_matrix
@@ -233,15 +247,6 @@ class Mesh:
         display.add_mesh(self)
 
 
-    # TODO: add camera as parameter
-    def to2D(self) -> 'tuple[matrix]':
-        """
-        Return the vertices mapped to 2D.
-        """
-        mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
-        # print(mapped_points[:2, :])
-        return mapped_points[:2, :]
-
     def toFBX(self, path: str, force: bool=False):
         """
         Save as fbx file.
@@ -254,7 +259,7 @@ class Mesh:
     def get2DVertex(self, i):
         """Given index `i`, return the `i`th mapped point."""
         assert isinstance(i, int)
-        return self.to2D()[:,i]
+        return self._2DVertices[:,i]
 
 
     # TODO: change assert to exception
@@ -294,4 +299,5 @@ class Mesh:
         rotation_matrix = self._rotation_matrix(angle)
         scale_matrix = self._scale_matrix(scale)
         self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
+        self._2DVertices = self._to2D()
 
