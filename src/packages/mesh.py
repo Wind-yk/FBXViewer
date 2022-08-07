@@ -68,7 +68,7 @@ class Mesh:
             [0, 0, z, 0],
             [0, 0, 0, 1]
         ])
-        self.scale = [x, y, z]
+        self.scale *= [x, y, z]
         return scale_matrix
 
 
@@ -89,7 +89,7 @@ class Mesh:
             [0, 0, 1, z],
             [0, 0, 0, 1]
         ])
-        self.shift = shift
+        self.center += shift
         return shift_matrix
 
 
@@ -119,7 +119,7 @@ class Mesh:
             [      0,                     0,                     0, 1]
         ])
 
-        self.angle = rotation
+        self.angle += rotation
         return rotation_matrix
 
 
@@ -129,8 +129,6 @@ class Mesh:
         Return the vertices mapped to 2D.
         """
         mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
-        print("Mapped points")
-        print(mapped_points)
         return mapped_points[:2, :] / mapped_points[2,:]
 
 
@@ -170,12 +168,19 @@ class Mesh:
     
     @property
     def center(self):
-        return self._edges
+        return self._center
 
 
     @center.setter
-    def center(self, center): 
-        self._center = center
+    def center(self, center):
+        if isinstance(center, Point):
+            self._center = center
+        elif isinstance(center, (int, float)):
+            self._center = Point(center, center, center)
+        elif isinstance(center, (list, tuple)):
+            self._center = Point(*center)
+        else:
+            raise TypeError("center must be set using one of: float, int, list, tuple, Point.")
 
     
     @property
@@ -185,7 +190,14 @@ class Mesh:
 
     @angle.setter
     def angle(self, angle):
-        self._angle = angle
+        if isinstance(angle, Point):
+            self._angle = angle
+        elif isinstance(angle, (int, float)):
+            self._angle = Point(angle, angle, angle)
+        elif isinstance(angle, (list, tuple)):
+            self._angle = Point(*angle)
+        else:
+            raise TypeError("angle must be set using one of: float, int, list, tuple, Point.")
 
     
     @property
@@ -195,7 +207,14 @@ class Mesh:
 
     @scale.setter
     def scale(self, scale):
-        self._scale = scale # [v*s for v,s in zip(values, self._scale)]
+        if isinstance(scale, Point):
+            self._scale = scale
+        if isinstance(scale, (int, float)):
+            self._scale = Point(scale, scale,scale)
+        elif isinstance(scale, (list, tuple, Point)):
+            self._scale = Point(*scale)  # [v*s for v,s in zip(values, self._scale)]
+        else:
+            raise TypeError("scale must be set using one of: float, int, list, tuple, Point.")
 
 
     @property
@@ -206,6 +225,7 @@ class Mesh:
     @show.setter
     def show(self, values): 
         self._show = values
+
 
     @property
     def transform_matrix(self):
