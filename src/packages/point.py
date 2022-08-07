@@ -59,7 +59,9 @@ class Point:
         if isinstance(rhs, (list, tuple)):
             if len(rhs) != 3:
                 raise ValueError("The length must be 3 for the sum of points.")
-            return self + Point(*rhs)
+            return Point(self.x+rhs[0], self.y+rhs[1], self.z+rhs[2])
+        elif isinstance(rhs, (float, int)):
+            return Point(self.x+rhs, self.y+rhs, self.z+rhs)
         elif isinstance(rhs, Point):
             return Point(self.x+rhs.x, self.y+rhs.y, self.z+rhs.z)
         else:
@@ -69,7 +71,9 @@ class Point:
         if isinstance(rhs, (list, tuple)):
             if len(rhs) != 3:
                 raise ValueError("The length must be 3 for the subtraction of points.")
-            return self - Point(*rhs)
+            return Point(self.x-rhs[0], self.y-rhs[1], self.z-rhs[2])
+        elif isinstance(rhs, (float, int)):
+            return Point(self.x-rhs, self.y-rhs, self.z-rhs)
         elif isinstance(rhs, Point):
             return Point(self.x-rhs.x, self.y-rhs.y, self.z-rhs.z)
         else:
@@ -79,10 +83,14 @@ class Point:
         if isinstance(rhs, (list, tuple)):
             if len(rhs) != 3:
                 raise ValueError("The length must be 3 for the multiplication of points.")
-            return self - Point(*rhs)
+            return Point(self.x*rhs[0], self.y*rhs[1], self.z*rhs[2])
+        elif isinstance(rhs, (float, int)):
+            return Point(self.x*rhs, self.y*rhs, self.z*rhs)
         elif isinstance(rhs, Point):
             return Point(self.x*rhs.x, self.y*rhs.y, self.z*rhs.z)
         else:
             raise TypeError("Can only multiply Points with Points, lists or tuples of length 3.")
 
+    def __len__(self):
+        return 3
 
