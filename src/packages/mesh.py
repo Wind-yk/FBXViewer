@@ -140,16 +140,12 @@ class Mesh:
         return self._vertices
 
 
-
-
     # TODO: change assert to exception
     # TODO: change the all equal to 1 -> allclose
     @vertices.setter
     def vertices(self, values):
         if not isinstance(values, matrix):
             values = asmatrix(values)
-
-
 
         if values.shape[0] != 4:         # check if the input is inverted
             assert values.shape[1] == 4  # ensure that it will have 4 rows
