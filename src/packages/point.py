@@ -15,6 +15,8 @@ class Point:
     Point(-2, 0, 2)
     >>> Point(1,2,3) * Point(2,3,4)  # element-wise
     Point(2, 6, 12)
+    >>> Point(1,2,3) - 3
+    Point(-2, -1, 0)
     """
 
     def __init__(self, x=0, y=0, z=0):
