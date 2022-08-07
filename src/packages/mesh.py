@@ -1,6 +1,7 @@
 from math import isclose
-from numpy import matrix, identity, sin, cos, pi, asmatrix, sqrt
 from numpy.linalg import inv
+from numpy import matrix, identity, sin, cos, pi, asmatrix, sqrt
+from typing import Union # this shouldn't be necessary for > Python 3.9
 
 # Project packages
 from packages.point import Point
@@ -14,9 +15,17 @@ class Mesh:
     send it to the Display class for render.
     """
     # ------------------------- internal methods ------------------------- #
-    def __init__(self, vertices: 'list[Point]', edges: 'list[float]', center: Point, angle: 'list[float]', scale: 'list[float]', color='b'):
+    def __init__(
+        self, 
+        vertices: Union[list, matrix], 
+        edges: 'list[int]', 
+        center: Union[Point, float, int, list, tuple], 
+        angle: Union[Point, float, int, list, tuple], 
+        scale: Union[Point, float, int, list, tuple], 
+        color: str='b'
+    ):
         self.vertices = vertices # matrix of shape 4×|V|
-        self.edges = edges       # 
+        self.edges = edges       # need discussion
         self.center = center
         self.angle = angle
         self.scale = scale
@@ -43,7 +52,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _scale_matrix(self, scale: 'list[float]' or 'float') -> matrix:
+    def _scale_matrix(self, scale: Union[Point, float, int, list, tuple]) -> matrix:
         """
         Get the matrix that multiplies all the components by a factor of `s`.
 
@@ -72,7 +81,7 @@ class Mesh:
         return scale_matrix
 
 
-    def _shift_matrix(self, shift: Point) -> matrix:
+    def _shift_matrix(self, shift: Union[Point, list, tuple]) -> matrix:
         """
         Get the matrix that shifts all components by the vector `shift`.
 
@@ -94,7 +103,7 @@ class Mesh:
 
 
     # TODO: change the assert to exception
-    def _rotation_matrix(self, rotation: list or tuple) -> matrix:
+    def _rotation_matrix(self, rotation: Union[Point, list, tuple]) -> matrix:
         """
         Get the matrix for the rotation.
 
@@ -124,7 +133,7 @@ class Mesh:
 
 
     # TODO: add camera as parameter
-    def _to2D(self) -> 'tuple[matrix]':
+    def _to2D(self) -> matrix:
         """
         Return the vertices mapped to 2D.
         """
@@ -137,42 +146,39 @@ class Mesh:
     def vertices(self):
         return self._vertices
 
-
     # TODO: change assert to exception
     # TODO: change the all equal to 1 -> allclose
     @vertices.setter
-    def vertices(self, values):
+    def vertices(self, values: Union[matrix, list]):
         if not isinstance(values, matrix):
             values = asmatrix(values)
 
-        if values.shape[0] != 4:         # check if the input is inverted
-            assert values.shape[1] == 4  # ensure that it will have 4 rows
+        if values.shape[0] != 4:         # the nº rows is not 4...
+            assert values.shape[1] == 4  # ensure that it will have 4 rows after transpose
             values = values.T
 
         if not (values[3,:] == 1).all():
-            assert values.shape[1] == 4  # ensure that it will have 4 rows
+            assert values.shape[1] == 4  # ensure that it will have 4 rows after transpose
             values = values.T
 
         self._vertices = values
 
 
     @property
-    def edges(self):
+    def edges(self) -> list:
         return self._edges
 
-
     @edges.setter
-    def edges(self, values): 
+    def edges(self, values: list): 
         self._edges = values
 
     
     @property
-    def center(self):
+    def center(self) -> Point:
         return self._center
 
-
     @center.setter
-    def center(self, center):
+    def center(self, center: Union[Point, float, int, list, tuple]):
         if isinstance(center, Point):
             self._center = center
         elif isinstance(center, (int, float)):
@@ -182,14 +188,13 @@ class Mesh:
         else:
             raise TypeError("center must be set using one of: float, int, list, tuple, Point.")
 
-    
+
     @property
-    def angle(self):
+    def angle(self) -> Point:
         return self._angle
 
-
     @angle.setter
-    def angle(self, angle):
+    def angle(self, angle: Union[Point, float, int, list, tuple]):
         if isinstance(angle, Point):
             self._angle = angle
         elif isinstance(angle, (int, float)):
@@ -199,14 +204,13 @@ class Mesh:
         else:
             raise TypeError("angle must be set using one of: float, int, list, tuple, Point.")
 
-    
+
     @property
-    def scale(self):
+    def scale(self) -> Point:
         return self._scale
 
-
     @scale.setter
-    def scale(self, scale):
+    def scale(self, scale: Union[Point, float, int, list, tuple]):
         if isinstance(scale, Point):
             self._scale = scale
         if isinstance(scale, (int, float)):
@@ -218,40 +222,39 @@ class Mesh:
 
 
     @property
-    def show(self):
+    def show(self) -> bool:
         return self._show
 
-
     @show.setter
-    def show(self, values): 
-        self._show = values
+    def show(self, value:bool): 
+        self._show = value
 
 
     @property
-    def transform_matrix(self):
+    def transform_matrix(self) -> matrix:
         return self._transform_matrix
 
-
     @transform_matrix.setter
-    def transform_matrix(self, values): 
+    def transform_matrix(self, values: matrix): 
         self._transform_matrix = values
 
 
     @property
-    def transform_matrix_backup(self):
+    def transform_matrix_backup(self) -> matrix:
         return self._transform_matrix_backup
 
-
     @transform_matrix_backup.setter
-    def transform_matrix_backup(self, values): 
+    def transform_matrix_backup(self, values: matrix): 
         self._transform_matrix_backup = values
 
+
     @property
-    def color(self):
+    def color(self) -> str:
         return self._color
 
+    # TODO: check if the color is valid
     @color.setter
-    def color(self, value):
+    def color(self, value: str):
         self._color = value
 
 
@@ -300,7 +303,15 @@ class Mesh:
         self.show = True
 
 
-    def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> None:
+    # TODO: update the class variables and apply the changes (after reviewing that the values are correct)
+    # TODO: so to automatically update the transformation matrix and the 2D vertex,
+    # TODO: instead of calculating them one by one.
+    def applyTransform(
+        self, 
+        center: Union[Point, float, int, list, tuple] = 0,
+        angle: Union[Point, float, int, list, tuple] = 0,
+        scale: Union[Point, float, int, list, tuple] = 1.
+    ) -> None:
         """
         Update the tranform matrix. First shift, then rotate and at the end scale.
         
