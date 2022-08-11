@@ -16,7 +16,7 @@ class Mesh:
     # ------------------------- internal methods ------------------------- #
     def __init__(self, vertices: 'list[Point]', edges: 'list[float]', center: Point, angle: 'list[float]', scale: 'list[float]', color='b'):
         self.vertices = vertices # matrix of shape 4×|V|
-        self.edges = edges       # 
+        self.edges = edges       #
         self.center = center
         self.angle = angle
         self.scale = scale
@@ -61,14 +61,14 @@ class Mesh:
             x = y = z = scale
         else:
             raise TypeError("Invalid scale.")
-        
+
         scale_matrix = matrix([
             [x, 0, 0, 0],
             [0, y, 0, 0],
             [0, 0, z, 0],
             [0, 0, 0, 1]
         ])
-        self.scale = [x, y, z]
+        self.scale = [v*s for v,s in zip(scale, self._scale)]
         return scale_matrix
 
 
@@ -78,7 +78,7 @@ class Mesh:
 
         # Parameters
             - `shift` (Point): represents the vector of shift.
-        
+
         # Output:
             - `shift_matrix` (matrix): 4×4 matrix
         """
@@ -89,7 +89,7 @@ class Mesh:
             [0, 0, 1, z],
             [0, 0, 0, 1]
         ])
-        self.shift = shift
+        self.center += shift
         return shift_matrix
 
 
@@ -108,7 +108,7 @@ class Mesh:
         """
         assert all(-2*pi <= angle < 2*pi for angle in rotation)
 
-        alfa, beta, gamma = rotation
+        alfa = beta = gamma = rotation
         c_a, c_b, c_c = cos(alfa), cos(beta), cos(gamma)
         s_a, s_b, s_c = sin(alfa), sin(beta), sin(gamma)
 
@@ -119,7 +119,7 @@ class Mesh:
             [      0,                     0,                     0, 1]
         ])
 
-        self.angle = rotation
+        self.angle += rotation
         return rotation_matrix
 
 
@@ -134,7 +134,7 @@ class Mesh:
         return mapped_points[:2, :] / mapped_points[2,:]
 
 
-    # ------------------------- properties ------------------------- # 
+    # ------------------------- properties ------------------------- #
     @property
     def vertices(self):
         return self._vertices
@@ -168,10 +168,10 @@ class Mesh:
 
 
     @edges.setter
-    def edges(self, values): 
+    def edges(self, values):
         self._edges = values
 
-    
+
     @property
     def center(self):
         return self._edges
@@ -181,7 +181,7 @@ class Mesh:
     def center(self, center): 
         self._center = center
 
-    
+
     @property
     def angle(self):
         return self._angle
@@ -191,7 +191,7 @@ class Mesh:
     def angle(self, angle):
         self._angle = angle
 
-    
+
     @property
     def scale(self):
         return self._scale
@@ -208,16 +208,15 @@ class Mesh:
 
 
     @show.setter
-    def show(self, values): 
+    def show(self, values):
         self._show = values
 
     @property
     def transform_matrix(self):
         return self._transform_matrix
 
-
     @transform_matrix.setter
-    def transform_matrix(self, values): 
+    def transform_matrix(self, values):
         self._transform_matrix = values
 
 
@@ -227,7 +226,7 @@ class Mesh:
 
 
     @transform_matrix_backup.setter
-    def transform_matrix_backup(self, values): 
+    def transform_matrix_backup(self, values):
         self._transform_matrix_backup = values
 
     @property
@@ -253,7 +252,7 @@ class Mesh:
         """
         pass
 
-    
+
     # TODO: change assert to exception
     # TODO: dynamic mapped point instead of calculating on-line
     def get2DVertex(self, i):
@@ -278,7 +277,7 @@ class Mesh:
         """Hide the geometric body."""
         self.show = False
 
-    
+
     def enable(self) -> None:
         """Display the geometric body."""
         self.show = True
@@ -287,7 +286,7 @@ class Mesh:
     def applyTransform(self, center: Point=Point(0,0,0), angle: list or tuple=(0,0,0), scale: float=1.) -> None:
         """
         Update the tranform matrix. First shift, then rotate and at the end scale.
-        
+
         # Parameters
             - `center` (Point): for translation
             - `angle` (list | tuple): 3-length in radians (yaw, pitch, roll)
@@ -300,4 +299,3 @@ class Mesh:
         scale_matrix = self._scale_matrix(scale)
         self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
         self._2DVertices = self._to2D()
-

@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     angle = [0,0,0]
 
-    #scale = [0,0,0]
+    #scale = [1,1,1]
     scale = 1
 
     m = Mesh(vertices,edges,center,angle,scale)
