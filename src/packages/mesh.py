@@ -44,9 +44,16 @@ class Mesh:
             [ 0, 0, 0, 1]
         ])
 
+        # http://citmalumnes.upc.es/~julianp/lina/section-20.html
+        self.camera = matrix([
+            [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
+            [         0, -4/sqrt(24), -1/sqrt(3), 4],\
+            [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
+            [         0,           0,          0, 1]])
+
         self.focal = matrix([
-            [1, 0, 0, 0], # f 0 0 0
-            [0, 1, 0, 0], # 0 f 0 0
+            [5, 0, 0, 0], # f 0 0 0
+            [0, 5, 0, 0], # 0 f 0 0
             [0, 0, 1, 0], # 0 0 1 0
         ])
         self.applyTransform(center, angle, scale)

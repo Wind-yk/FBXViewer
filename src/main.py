@@ -1,6 +1,7 @@
 import yaml
 from yaml.loader import SafeLoader
 import numpy as np
+from numpy import cos, sin, pi
 import matplotlib.pyplot as plt
 
 # Project packages
@@ -13,13 +14,20 @@ CONFIG_PATH = "config/config.yaml"
 if __name__ == '__main__':
 
 
-    with open(CONFIG_PATH) as f:
-        config = yaml.load(f, Loader=SafeLoader)["configuration"]
-    list_mesh = readFBX(**config['readFBX'])
+    # with open(CONFIG_PATH) as f:
+    #     config = yaml.load(f, Loader=SafeLoader)["configuration"]
+    # list_mesh = readFBX(**config['readFBX'])
 
-    print(list_mesh[0].vertices, list_mesh[0].edges, sep='-'*30 + '\n')
+    # print(list_mesh[0].vertices, list_mesh[0].edges, sep='-'*30 + '\n')
     display = Display()
 
+    m = 21; n = 2;
+    a = 5; b = 1;
+    n_pts = 500;
+    torus_knot = [
+        ((a+b*cos(m*s))*cos(n*s), (a+b*cos(m*s))*sin(n*s), b*sin(m*s))
+                    for s in np.arange(0,2*pi,2*pi/n_pts)
+    ]
     vertices = [
         [ 1.,  1.,  1.,  1., -1., -1., -1., -1.],
         [ 1.,  1., -1., -1.,  1.,  1., -1., -1.],
@@ -27,6 +35,7 @@ if __name__ == '__main__':
         [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]
     ]
 
+    # vertices = torus_knot
     def foo(l):
         out = []
         i = 0
@@ -44,7 +53,7 @@ if __name__ == '__main__':
         return out
 
     edges = foo([0, 4, 6, -3, 3, 2, 6, -8, 7, 6, 4, -6, 5, 1, 3, -8, 1, 0, 2, -4, 5, 4, 0, -2])
-
+    # edges = [(i,i) for i in range(500)] 
     center = [0,0,0]
 
     angle = [0,0,0]
