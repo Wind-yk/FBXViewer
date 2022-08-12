@@ -45,11 +45,18 @@ class Mesh:
         ])
 
         # http://citmalumnes.upc.es/~julianp/lina/section-20.html
+        '''
         self.camera = matrix([
             [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
             [         0, -4/sqrt(24), -1/sqrt(3), 4],\
             [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
             [         0,           0,          0, 1]])
+        '''
+        self.camera = matrix([
+        [1, 0, 0, 1],
+        [0, 1, 0, 4],
+        [0, 0, 1, 5],
+        [0, 0, 0, 1]])
 
         self.focal = matrix([
             [5, 0, 0, 0], # f 0 0 0
@@ -135,6 +142,8 @@ class Mesh:
         """
         Return the vertices mapped to 2D.
         """
+        print(self.vertices)
+
         mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
         # print('-'*30, 'mapped points 1')
         # print(self.transform_matrix @ self.vertices)
@@ -202,7 +211,7 @@ class Mesh:
             values = values.T
 
         self._vertices = values
-        print(self._vertices[:5,:5])
+        #print(self._vertices[:5,:5])
 
 
     @property
@@ -361,7 +370,7 @@ class Mesh:
         scale_matrix    = self._scale_matrix()
 
 
-        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
+        self.transform_matrix =  scale_matrix @ rotation_matrix @ shift_matrix
 
         # print('-'*30, 'transform matrix')
         # print(self.transform_matrix)

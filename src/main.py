@@ -53,6 +53,7 @@ if __name__ == '__main__':
         return out
 
     edges = foo([0, 4, 6, -3, 3, 2, 6, -8, 7, 6, 4, -6, 5, 1, 3, -8, 1, 0, 2, -4, 5, 4, 0, -2])
+
     # edges = [(i,i) for i in range(500)] 
     center = [0,0,0]
 
@@ -68,7 +69,7 @@ if __name__ == '__main__':
     # for mesh in list_mesh:
     #     mesh.send2render(display)
 
-    display.start()
+    #display.start()
 
     display.show()
 

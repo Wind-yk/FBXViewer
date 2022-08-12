@@ -1,10 +1,12 @@
 from telnetlib import X3PAD
+from tracemalloc import start
 from matplotlib.axis import Axis
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 from numpy import matrix, size, zeros
 from matplotlib.widgets import TextBox
 from packages.camera import Camera
+from random import random
 
 class Display:
     """Displays several geometric bodies"""
@@ -17,36 +19,57 @@ class Display:
 
         self.winSize = [5, 5]
 
+        self.MoveXBtn:Button()
+
+        self.started = False
+
+        self.fig, self.defaultPlt = plt.subplots()
+
     def start(self):
         '''Configurate window size'''
-        plt.figure(figsize=(self.winSize[0], self.winSize[1]))
+        # plt.figure(figsize=(self.winSize[0], self.winSize[1]))
 
-        # axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
+        axnext = plt.axes([0.85, 0.90, 0.1, 0.075])
 
-        # btn = Button(axnext, "Next")
+        self.MoveXBtn = Button(axnext, "MoveX")
 
-        # btn.on_clicked(self.hi)
+        self.MoveXBtn.on_clicked(self.MoveX)
 
-    def hi(slef):
-        print("hello")
+    def MoveX(self, event):
+        for mesh in self.meshes:
+            mesh.camera[0,3] += 1
+            mesh.applyTransform()
+        self.show()
 
     def show(self):
         """
         Show all the enable meshes and handle the interaction.
         """
+        self.defaultPlt.clear()
 
         pointsX = zeros(2)
         pointsY = zeros(2)
-
+        printed_edges = []
         for mesh in self.meshes:
             for edge in mesh.edges:
                 pointsX[0] = int(mesh.get2DVertex(edge[0])[0])
                 pointsX[1] = int(mesh.get2DVertex(edge[1])[0])
                 pointsY[0] = int(mesh.get2DVertex(edge[0])[1])
                 pointsY[1] = int(mesh.get2DVertex(edge[1])[1])
-                plt.plot(pointsX,pointsY, mesh.color)
+                #plt.plot(pointsX,pointsY, mesh.color)
+                self.defaultPlt.plot(pointsX,pointsY, mesh.color+'-o')
+                sep = .1 # separation
+                if edge[0] not in printed_edges:
+                    self.defaultPlt.text(pointsX[0]+(2*random()-1)*sep, pointsY[0]+(2*random()-1)*sep, edge[0], fontsize=12, color='r')
+                    printed_edges.append(edge[0])
+                if edge[1] not in printed_edges:
+                    self.defaultPlt.text(pointsX[1]+(2*random()-1)*sep, pointsY[1]+(2*random()-1)*sep, edge[1], fontsize=12, color='r')
+                    printed_edges.append(edge[1])
 
-        plt.show(block=True)
+        if not self.started:
+            self.started = True
+            self.start()
+            plt.show(block=True) 
 
     def add_mesh(self,mesh):
         self.meshes.append(mesh)
