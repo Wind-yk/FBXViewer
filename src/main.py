@@ -69,8 +69,6 @@ if __name__ == '__main__':
     # for mesh in list_mesh:
     #     mesh.send2render(display)
 
-    #display.start()
-
-    display.show()
+    display.start()
 
 pass

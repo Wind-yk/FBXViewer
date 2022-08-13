@@ -29,22 +29,24 @@ class Display:
         '''Configurate window size'''
         # plt.figure(figsize=(self.winSize[0], self.winSize[1]))
 
+        self.updateMeshes()
+
         axnext = plt.axes([0.85, 0.90, 0.1, 0.075])
 
         self.MoveXBtn = Button(axnext, "MoveX")
 
         self.MoveXBtn.on_clicked(self.MoveX)
 
+        plt.show(block=True) 
+
     def MoveX(self, event):
         for mesh in self.meshes:
             mesh.camera[0,3] += 1
             mesh.applyTransform()
-        self.show()
+        self.updateMeshes()
 
-    def show(self):
-        """
-        Show all the enable meshes and handle the interaction.
-        """
+    def updateMeshes(self):
+
         self.defaultPlt.clear()
 
         pointsX = zeros(2)
@@ -65,11 +67,6 @@ class Display:
                 if edge[1] not in printed_edges:
                     self.defaultPlt.text(pointsX[1]+(2*random()-1)*sep, pointsY[1]+(2*random()-1)*sep, edge[1], fontsize=12, color='r')
                     printed_edges.append(edge[1])
-
-        if not self.started:
-            self.started = True
-            self.start()
-            plt.show(block=True) 
 
     def add_mesh(self,mesh):
         self.meshes.append(mesh)
