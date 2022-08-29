@@ -2,7 +2,7 @@ from math import isclose
 from multiprocessing.sharedctypes import Value
 from numpy.linalg import inv
 from numpy import matrix, identity, sin, cos, asmatrix, sqrt, append, ones
-from typing import Union # this shouldn't be necessary for > Python 3.9
+from typing import Union # this shouldn't be necessary for Python > 3.9
 
 # Project packages
 from packages.point import Point
@@ -37,12 +37,12 @@ class Mesh:
         # print(self.vertices)
 
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
-        self.camera = matrix([
-            [ 1, 0, 0, 1],
-            [ 0, 1, 0, 0],
-            [ 0, 0, 1, 0],
-            [ 0, 0, 0, 1]
-        ])
+        # self.camera = matrix([
+        #     [ 1, 0, 0, 1],
+        #     [ 0, 1, 0, 0],
+        #     [ 0, 0, 1, 0],
+        #     [ 0, 0, 0, 1]
+        # ])
 
         # http://citmalumnes.upc.es/~julianp/lina/section-20.html
         
@@ -185,10 +185,10 @@ class Mesh:
         """
         if not isinstance(values, matrix):
             values = asmatrix(values)
-        
         # check if we should add a final row/column of 1s to ensure that it is homogeneous.
-        if (values.shape[0] == 3 and (values.shape[1] != 4 or (values.shape[1] == 1 and not (values[:,3] == 1).all()))) or \
-           (values.shape[1] == 3 and (values.shape[0] != 4 or (values.shape[0] == 1 and not (values[3,:] == 1).all()))):
+        if (values.shape[0] == 3 and (values.shape[1] != 4 or (values.shape[1] == 4 and not (values[:,3] == 1).all()))) or \
+           (values.shape[1] == 3 and (values.shape[0] != 4 or (values.shape[0] == 4 and not (values[3,:] == 1).all()))):
+
             point_axis = int(values.shape[1] == 3)  # same as 0 if values.shape[0] == 3 else 1
             new_axs_shape = [values.shape[0], 1] if values.shape[1] == 3 else [1, values.shape[1]]
             # print('values:', values.shape, point_axis, dim_axis)
@@ -365,6 +365,6 @@ class Mesh:
         shift_matrix    = self._shift_matrix()
         rotation_matrix = self._rotation_matrix()
         scale_matrix    = self._scale_matrix()
-        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
+        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
         
         self._2DVertices = self._to2D()
