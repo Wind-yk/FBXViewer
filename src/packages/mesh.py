@@ -365,6 +365,6 @@ class Mesh:
         shift_matrix    = self._shift_matrix()
         rotation_matrix = self._rotation_matrix()
         scale_matrix    = self._scale_matrix()
-        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix @ self.transform_matrix
+        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
         
         self._2DVertices = self._to2D()
