@@ -20,25 +20,10 @@ if __name__ == '__main__':
 
     # print(list_mesh[0].vertices, list_mesh[0].edges, sep='-'*30 + '\n')
     display = Display()
-
-    m = 21; n = 2;
-    a = 5; b = 1;
-    n_pts = 500;
-    torus_knot = [
-        ((a+b*cos(m*s))*cos(n*s), (a+b*cos(m*s))*sin(n*s), b*sin(m*s))
-                    for s in np.arange(0,2*pi,2*pi/n_pts)
-    ]
-    vertices = [
-        [ 1.,  1.,  1.,  1., -1., -1., -1., -1.],
-        [ 1.,  1., -1., -1.,  1.,  1., -1., -1.],
-        [ 1., -1.,  1., -1.,  1., -1.,  1., -1.],
-        [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]
-    ]
-
-    # vertices = torus_knot
+    
     def foo(l):
-        out = []
         i = 0
+        out = []
         first_index = 0
         while i < len(l)-1:
             x = l[i] if l[i] >= 0 else -l[i] - 1
@@ -52,23 +37,30 @@ if __name__ == '__main__':
                 i += 1
         return out
 
-    edges = foo([0, 4, 6, -3, 3, 2, 6, -8, 7, 6, 4, -6, 5, 1, 3, -8, 1, 0, 2, -4, 5, 4, 0, -2])
+    Mesh(
+        vertices=[
+            [ 1.,  1., -1., -1.,  1.,  1., -1., -1.],
+            [ 1.,  1.,  1.,  1., -1., -1., -1., -1.],
+            [ 1., -1.,  1., -1.,  1., -1.,  1., -1.],
+            [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]
+        ],
+        edges=foo([0, 4, 6, -3, 3, 2, 6, -8, 7, 6, 4, -6, 5, 1, 3, -8, 1, 0, 2, -4, 5, 4, 0, -2]),
+        shift=0,
+        angle=0,
+        scale=1,
+        color='b'
+    ).send2render(display)
 
-    # edges = [(i,i) for i in range(500)] 
-    center = [0,0,0]
-
-    angle = [0,0,0]
-
-    #scale = [1,1,1]
-    scale = 1
-
-    m = Mesh(vertices,edges,center,angle,scale)
-
-    m.send2render(display)
+    Mesh(
+        vertices=[[0,0,0],[1,0,0],[0,1,0],[0,0,1]],
+        edges=[(0,i) for i in range(1,4)],
+        angle=0,
+        shift=0,
+        scale=1,
+        color='r'
+    ).send2render(display)
 
     # for mesh in list_mesh:
     #     mesh.send2render(display)
 
     display.start()
-
-pass
