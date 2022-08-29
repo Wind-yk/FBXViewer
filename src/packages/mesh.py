@@ -22,14 +22,14 @@ class Mesh:
         self,
         vertices: Union[list, matrix],
         edges:   'list[int]',
-        center:   Union[Point, float, int, list, tuple],
+        shift:    Union[Point, float, int, list, tuple],
         angle:    Union[Point, float, int, list, tuple],
         scale:    Union[Point, float, int, list, tuple],
         color:    str='b'
     ):
         self.vertices = vertices    # matrix of shape 4×|V|
         self.edges    = edges       # need discussion
-        self.center   = center
+        self.shift    = shift
         self.angle    = angle
         self.scale    = scale
 
@@ -45,25 +45,25 @@ class Mesh:
         ])
 
         # http://citmalumnes.upc.es/~julianp/lina/section-20.html
-        '''
+        
         self.camera = matrix([
             [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
             [         0, -4/sqrt(24), -1/sqrt(3), 4],\
             [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
             [         0,           0,          0, 1]])
-        '''
-        self.camera = matrix([
-        [1, 0, 0, 1],
-        [0, 1, 0, 4],
-        [0, 0, 1, 5],
-        [0, 0, 0, 1]])
+        # self.camera = matrix([
+        # [1, 0, 0, 1],
+        # [0, 1, 0, 4],
+        # [0, 0, 1, 5],
+        # [0, 0, 0, 1]])
 
         self.focal = matrix([
             [5, 0, 0, 0], # f 0 0 0
             [0, 5, 0, 0], # 0 f 0 0
             [0, 0, 1, 0], # 0 0 1 0
         ])
-        self.applyTransform(center, angle, scale)
+
+        self.applyTransform(shift, angle, scale)
 
         self.show = True
         self.color = color
@@ -100,7 +100,7 @@ class Mesh:
         # Output:
             - `shift_matrix` (matrix): 4×4 matrix
         """
-        x, y, z = self._center
+        x, y, z = self._shift
         shift_matrix = matrix([
             [1, 0, 0, x],
             [0, 1, 0, y],
@@ -142,7 +142,7 @@ class Mesh:
         """
         Return the vertices mapped to 2D.
         """
-        print(self.vertices)
+        # print(self.vertices)
 
         mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
         # print('-'*30, 'mapped points 1')
@@ -151,7 +151,6 @@ class Mesh:
         # print(inv(self.camera) @ self.transform_matrix @ self.vertices)
         # print('-'*30, 'mapped points 3')
         # print(mapped_points)
-
         return mapped_points[:2, :] / mapped_points[2,:]  # homogeneous coordinates
 
 
@@ -160,7 +159,7 @@ class Mesh:
     def vertices(self):
         return self._vertices
 
-    # TODO: optimize all 1 check
+    # TODO: optimize the process
     @vertices.setter
     def vertices(self, values: Union[matrix, list]):
         """
@@ -187,7 +186,6 @@ class Mesh:
         if not isinstance(values, matrix):
             values = asmatrix(values)
         
-        # this should be optimizes as well...
         # check if we should add a final row/column of 1s to ensure that it is homogeneous.
         if (values.shape[0] == 3 and (values.shape[1] != 4 or (values.shape[1] == 1 and not (values[:,3] == 1).all()))) or \
            (values.shape[1] == 3 and (values.shape[0] != 4 or (values.shape[0] == 1 and not (values[3,:] == 1).all()))):
@@ -201,7 +199,6 @@ class Mesh:
         if not (values.shape[0] == 4 or values.shape[1] == 4):
             raise ValueError(f"At least one of the dimensions has to be 4 to set the vertices. {values.shape} is given.")
 
-        # I think we can optimize this...
         if (values.shape[0] == 4 and values.shape[1] != 4 and not (values[3,:] == 1).all()) or \
            (values.shape[0] != 4 and values.shape[1] == 4 and not (values[:,3] == 1).all()) or \
            (values.shape == (4,4) and not ((values[:,3] == 1).all() or (values[3,:] == 1).all())) :
@@ -211,7 +208,7 @@ class Mesh:
             values = values.T
 
         self._vertices = values
-        #print(self._vertices[:5,:5])
+        # print(self._vertices[:5,:5])
 
 
     @property
@@ -224,17 +221,17 @@ class Mesh:
 
 
     @property
-    def center(self) -> Point:
-        return self._center
+    def shift(self) -> Point:
+        return self._shift
 
-    @center.setter
-    def center(self, center: Union[Point, float, int, list, tuple]):
-        if isinstance(center, Point):
-            self._center = center
-        elif isinstance(center, (int, float)):
-            self._center = Point(center, center, center)
-        elif isinstance(center, (list, tuple)):
-            self._center = Point(*center)
+    @shift.setter
+    def shift(self, shift: Union[Point, float, int, list, tuple]):
+        if isinstance(shift, Point):
+            self._shift = shift
+        elif isinstance(shift, (int, float)):
+            self._shift = Point(shift, shift, shift)
+        elif isinstance(shift, (list, tuple)):
+            self._shift = Point(*shift)
         else:
             raise TypeError("center must be set using one of: float, int, list, tuple, Point.")
 
@@ -345,9 +342,9 @@ class Mesh:
 
     def applyTransform(
         self,
-        center: Union[Point, float, int, list, tuple] = 0,
-        angle:  Union[Point, float, int, list, tuple] = 0,
-        scale:  Union[Point, float, int, list, tuple] = 1.
+        shift: Union[Point, float, int, list, tuple] = 0,
+        angle: Union[Point, float, int, list, tuple] = 0,
+        scale: Union[Point, float, int, list, tuple] = 1.
     ) -> None:
         """
         Update the 2D Vertices. First shift, then rotate and at the end scale.
@@ -360,19 +357,14 @@ class Mesh:
         https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
         """
         # Update internal parameters
-        self.scale  *= scale
-        self.center += center
-        self.angle  += angle
+        self.scale *= scale
+        self.shift += shift
+        self.angle += angle
 
         # Update transoform matrix
         shift_matrix    = self._shift_matrix()
         rotation_matrix = self._rotation_matrix()
         scale_matrix    = self._scale_matrix()
-
-
-        self.transform_matrix =  scale_matrix @ rotation_matrix @ shift_matrix
-
-        # print('-'*30, 'transform matrix')
-        # print(self.transform_matrix)
-        # Update 2D vertices
+        self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
+        
         self._2DVertices = self._to2D()
