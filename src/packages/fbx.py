@@ -224,15 +224,12 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     # Open the created json file for data and read objects from it
     with open(json_path, 'r') as file:
         data = preprocessFBXjson(json.load(file))
-
-    # Get the properties of the meshes
-    verts, edges, shifts, angles, scales = getProperties(data['Objects'])
     
     # Build the list of Mesh
     mesh_list = [
         Mesh(vertex, edge, shift, angle, scale) 
         for vertex, edge, shift, angle, scale
-        in zip(verts, edges, shifts, angles, scales)
+        in zip(*getProperties(data['Objects']))
     ]
     
     return mesh_list
