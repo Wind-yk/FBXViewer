@@ -1,11 +1,16 @@
-import sys
-import string
 import os
 import json
-import math
+from math import radians
+from pathlib import Path
 
 # Project defined classes
 from packages.mesh import Mesh
+
+
+class FBXReaderError(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, *kwargs)
+
  
 def fbx2json(input:str, output:str, force:bool=False):
     """
@@ -27,6 +32,170 @@ def fbx2json(input:str, output:str, force:bool=False):
     # Execute the readFbxInfo.exe
     os.system(input)
 
+
+def getKeyIndices(input_dict: dict, list_name_key: str, dict_name_key: str):
+    """
+    Returns a dictionary of kind {dict[list_name_key][dict_name_key]: [indices]}
+    and remove the dict_name_key in the original dict
+    
+    # Example
+    ```
+    input:
+    {
+        'list_name': [
+            { 'dict_name': 'Geometry' },
+            { 'dict_name': 'Geometry' },
+            { 'dict_name': 'Model' }
+        ]
+    }
+    output:
+    {
+        'Geometry': [0,1],
+        'Model': [2]
+    }
+    ```
+    """
+    key_indices = {}
+    for idx, child in enumerate(input_dict[list_name_key]):
+        key = child.pop(dict_name_key)
+        if key in key_indices:
+            key_indices[key].append(idx)
+        elif key == '' and child == {}:
+            continue
+        else:
+            key_indices[key] = [idx]
+    return key_indices
+
+
+def preprocessFBXjson(data: dict, rec: int = 1):
+    """
+    The original json is quite difficult to read as dict.
+    Using this function we recursively convert the list 
+    of children names to key of a new list/dictionary.
+
+    Warning: the process might not be reversible, as some 
+    content may be erased. 
+    
+    # Example
+    ```
+    {
+        "version": 0,
+        "children": [
+            { "name": "Geometry", "x": {...}, "y": {...} },
+            { "name": "Geometry", "x": {...}, "z": {...} },
+            { "name": "" },
+            { 
+              "name": "P",
+              "properties": [
+                    { "type": "S", "value": "string1" },
+                    { "type": "S", "value": "string2" },
+                    { "type": "D", "value": 0.000000 },
+                    { "type": "D", "value": 0.000000 },
+                    { "type": "D", "value": 0.000000 }
+                ]
+            }
+        ]
+    }
+    ```
+    is converted to:
+    ```
+    {
+        "version": 0,
+        "Geometry": [
+            {"x": {...}, "y": {...}},
+            {"x": {...}, "z": {...}},
+        ],
+        "P": {
+            "S": ["string1", "string2"],
+            "D": [0.000000, 0.000000, 0.000000]
+        }
+    }
+    ```
+    """
+    list_keys = [('children', 'name'), ('properties', 'type')]
+    for list_name_key, dict_name_key in list_keys:
+        if list_name_key in data:
+            for key, indices in getKeyIndices(data, list_name_key, dict_name_key).items():
+                if len(indices) == 1:
+                    data[key] = preprocessFBXjson(data[list_name_key][indices[0]], rec+1) \
+                                if list_name_key == 'children' \
+                                else data[list_name_key][indices[0]]['value']
+                else:
+                    data[key] = [preprocessFBXjson(data[list_name_key][idx], rec+1) for idx in indices] \
+                                if list_name_key == 'children' \
+                                else [data[list_name_key][idx]['value'] for idx in indices]
+            data.pop(list_name_key)
+    return data
+
+
+def list2edges(l: list):
+    """
+    Converts the list of FBX edges to a list tuples of 2 vertices.
+    
+    This may reduce the performance when drawing.
+
+    # Example
+    `[0, 4, 6, -3]` is converted to `[(0, 4), (4, 6), (6, 2), (2, 0)]`.
+    """
+    i = 0
+    out = []
+    first_index = 0
+    while i < len(l)-1:
+        x = l[i]   if l[i]   >= 0 else -l[i]   - 1
+        y = l[i+1] if l[i+1] >= 0 else -l[i+1] - 1
+        out.append((x,y))
+        if l[i+1] < 0:
+            out.append((y,l[first_index]))
+            i += 2
+            first_index = i
+        else:
+            i += 1
+    return out
+
+def getProperties(objs: dict):
+    """
+    Given the preprocessed objects of the FBX,
+    return the properties:
+        verts, edges, shifts, angles, scales
+    as lists.
+    """
+    # Get vertices and edges
+    geoms = objs['Geometry'] if isinstance(objs['Geometry'], list) else [objs['Geometry']]
+    verts = [geom['Vertices']['d'] for geom in geoms]
+    verts = [[vert[i:i+3] for i in range(0,len(vert),3)] for vert in verts]
+    edges = [list2edges(geom['PolygonVertexIndex']['i']) for geom in geoms]
+    
+    # Get translation, rotation and scaling. 
+    # Default values are set as they might not exist in the data.
+    shifts, angles, scales = [], [], []
+    models = objs['Model'] if isinstance(objs['Model'], list) else [objs['Model']]
+    for model in models:
+        sh, an, sc = 0, 0, 1
+        for prop in model['Properties70']['P']:
+            if prop['S'][0] == 'Lcl Translation':
+                sh = prop['D']
+            elif prop['S'][0] == 'Lcl Rotation':
+                an = [radians(angle) for angle in prop['D']]
+            elif prop['S'][0] == 'Lcl Scaling':
+                sc = [scale/100 for scale in prop['D']]
+        shifts.append(sh)
+        angles.append(an)
+        scales.append(sc)
+    
+    # Check that the length of the variables matches
+    if not len(verts) == len(edges) == len(shifts) == len(angles) == len(scales):
+        raise FBXReaderError(
+            f"""The length of the properties are not the same:
+            verts:  {len(verts)},
+            edges:  {len(edges)},
+            shifts: {len(shifts)},
+            angles: {len(angles)},
+            scales: {len(scales)}"""
+        )
+
+    return verts, edges, shifts, angles, scales
+
+
 def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     """
     Return a list of Mesh from the FBX file.
@@ -42,63 +211,29 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
 
     ⚠ In case that overwrite is set, then converts anyway.
     """
-    # Check if the file exists, if it is already in json. If it is not,
-    # then first use fbx2json to convert it to json and read it as so.
-
-    # Create empty mesh list
-    mesh_list = []
-
     # Convert fbx file to json
+    if json_path is None:
+        json_path = Path(fbx_path)
+        json_path = json_path.parent.parent / "med" / json_path.stem + ".json"
+
     try:
         fbx2json(fbx_path, json_path, overwrite)
     except FileExistsError as e:
-        print(e)
+        print(f'readFBX: {e}')
 
-    # Open the created json file for data
+    # Open the created json file for data and read objects from it
     with open(json_path, 'r') as file:
-        data = json.load(file)
+        data = preprocessFBXjson(json.load(file))
 
-    counter = 0
-    # Assign predetermined values for center, angle, scale
-    center = [0, 0, 0]
-    angle = [0, 0, 0]
-    scale = [1, 1, 1]
-
-    for i,v in enumerate(data['children'][8]['children']):
-        # Create the list of mesh according to the number of geometries there are
-        if v['name'] == "Geometry":
-            vertices = v['children'][2]['properties'][0]['value']
-            vertices = [vertices[i:i+3] for i in range(0, len(vertices), 3)]
-            vertices = [[*v, 1.0] for v in vertices]
-            edges = v['children'][3]['properties'][0]['value']
-            new_mesh = Mesh(vertices, edges, center, angle, scale)
-            mesh_list.append(new_mesh)
-
-        # Fill up the information in each mesh acording to its respective model
-        elif v['name'] == "Model":
-            for i2, v2 in enumerate(v['children'][1]['children']):
-                # Necessary information is allocated at most at ['children'][2]
-                if i2 <= 2:
-                    # Reminder: there will not always be data about Translation or Rotation, but we assume that there will always be Scaling info
-                    if v2['properties'][0]['value'] == "Lcl Translation":
-                        center = []
-                        for idx in range(4, 7):
-                            center.append(v2['properties'][idx]['value'])
-                    elif v2['properties'][0]['value'] == "Lcl Rotation":
-                        angle = []
-                        for idx in range(4, 7):
-                            # Convert angles to radians
-                            angle.append(math.radians(v2['properties'][idx]['value']))
-                    elif v2['properties'][0]['value'] == "Lcl Scaling":
-                        scale = []
-                        for idx in range(4, 7):
-                            # Convert percentage to scale
-                            scale.append(v2['properties'][idx]['value']/100)
-            
-            mesh_list[counter] = Mesh(mesh_list[counter].vertices, mesh_list[counter].edges, center, angle, scale)
-            center = [0, 0, 0]
-            angle = [0, 0, 0]
-            counter += 1
-
+    # Get the properties of the meshes
+    verts, edges, shifts, angles, scales = getProperties(data['Objects'])
+    
+    # Build the list of Mesh
+    mesh_list = [
+        Mesh(vertex, edge, shift, angle, scale) 
+        for vertex, edge, shift, angle, scale
+        in zip(verts, edges, shifts, angles, scales)
+    ]
+    
     return mesh_list
 
