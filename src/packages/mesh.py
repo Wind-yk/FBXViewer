@@ -250,7 +250,6 @@ class Mesh:
     def show(self, value:bool):
         self._show = value
 
-
     @property
     def transform_matrix(self) -> matrix:
         return self._transform_matrix
@@ -338,3 +337,4 @@ class Mesh:
         self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
         
         self._2DVertices = self._to2D(camera)
+

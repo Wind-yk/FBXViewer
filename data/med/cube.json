@@ -1,0 +1,2041 @@
+{
+  "version": 7400,
+  "children": [
+    { "name": "FBXHeaderExtension",
+      "children": [
+        { "name": "FBXHeaderVersion",
+          "properties": [
+            { "type": "I", "value": 1003 }
+          ]
+        },
+        { "name": "FBXVersion",
+          "properties": [
+            { "type": "I", "value": 7400 }
+          ]
+        },
+        { "name": "EncryptionType",
+          "properties": [
+            { "type": "I", "value": 0 }
+          ]
+        },
+        { "name": "CreationTimeStamp",
+          "children": [
+            { "name": "Version",
+              "properties": [
+                { "type": "I", "value": 1000 }
+              ]
+            },
+            { "name": "Year",
+              "properties": [
+                { "type": "I", "value": 2022 }
+              ]
+            },
+            { "name": "Month",
+              "properties": [
+                { "type": "I", "value": 7 }
+              ]
+            },
+            { "name": "Day",
+              "properties": [
+                { "type": "I", "value": 5 }
+              ]
+            },
+            { "name": "Hour",
+              "properties": [
+                { "type": "I", "value": 12 }
+              ]
+            },
+            { "name": "Minute",
+              "properties": [
+                { "type": "I", "value": 34 }
+              ]
+            },
+            { "name": "Second",
+              "properties": [
+                { "type": "I", "value": 34 }
+              ]
+            },
+            { "name": "Millisecond",
+              "properties": [
+                { "type": "I", "value": 788 }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "Creator",
+          "properties": [
+            { "type": "S", "value": "Blender (stable FBX IO) - 3.0.1 - 4.27.0" }
+          ]
+        },
+        { "name": "SceneInfo",
+          "properties": [
+            { "type": "S", "value": "GlobalInfo\u0000\u0001SceneInfo" },
+            { "type": "S", "value": "UserData" }
+          ],
+          "children": [
+            { "name": "Type",
+              "properties": [
+                { "type": "S", "value": "UserData" }
+              ]
+            },
+            { "name": "Version",
+              "properties": [
+                { "type": "I", "value": 100 }
+              ]
+            },
+            { "name": "MetaData",
+              "children": [
+                { "name": "Version",
+                  "properties": [
+                    { "type": "I", "value": 100 }
+                  ]
+                },
+                { "name": "Title",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "Subject",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "Author",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "Keywords",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "Revision",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "Comment",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "Properties70",
+              "children": [
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "DocumentUrl" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "Url" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "/foobar.fbx" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "SrcDocumentUrl" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "Url" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "/foobar.fbx" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original" },
+                    { "type": "S", "value": "Compound" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original|ApplicationVendor" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "Blender Foundation" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original|ApplicationName" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "Blender (stable FBX IO)" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original|ApplicationVersion" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "3.0.1" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original|DateTime_GMT" },
+                    { "type": "S", "value": "DateTime" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "01/01/1970 00:00:00.000" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Original|FileName" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "/foobar.fbx" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "LastSaved" },
+                    { "type": "S", "value": "Compound" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "LastSaved|ApplicationVendor" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "Blender Foundation" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "LastSaved|ApplicationName" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "Blender (stable FBX IO)" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "LastSaved|ApplicationVersion" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "3.0.1" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "LastSaved|DateTime_GMT" },
+                    { "type": "S", "value": "DateTime" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "01/01/1970 00:00:00.000" }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "FileId",
+      "properties": [
+        { "type": "R", "value": "40 -77 42 -21 -74 36 -52 -62 -65 -56 -80 42 -87 43 -4 -15 " }
+      ]
+    },
+    { "name": "CreationTime",
+      "properties": [
+        { "type": "S", "value": "1970-01-01 10:00:00:000" }
+      ]
+    },
+    { "name": "Creator",
+      "properties": [
+        { "type": "S", "value": "Blender (stable FBX IO) - 3.0.1 - 4.27.0" }
+      ]
+    },
+    { "name": "GlobalSettings",
+      "children": [
+        { "name": "Version",
+          "properties": [
+            { "type": "I", "value": 1000 }
+          ]
+        },
+        { "name": "Properties70",
+          "children": [
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "UpAxis" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "UpAxisSign" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "FrontAxis" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 2 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "FrontAxisSign" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "CoordAxis" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 0 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "CoordAxisSign" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "OriginalUpAxis" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": -1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "OriginalUpAxisSign" },
+                { "type": "S", "value": "int" },
+                { "type": "S", "value": "Integer" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "UnitScaleFactor" },
+                { "type": "S", "value": "double" },
+                { "type": "S", "value": "Number" },
+                { "type": "S", "value": "" },
+                { "type": "D", "value": 1.000000 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "OriginalUnitScaleFactor" },
+                { "type": "S", "value": "double" },
+                { "type": "S", "value": "Number" },
+                { "type": "S", "value": "" },
+                { "type": "D", "value": 1.000000 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "AmbientColor" },
+                { "type": "S", "value": "ColorRGB" },
+                { "type": "S", "value": "Color" },
+                { "type": "S", "value": "" },
+                { "type": "D", "value": 0.000000 },
+                { "type": "D", "value": 0.000000 },
+                { "type": "D", "value": 0.000000 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "DefaultCamera" },
+                { "type": "S", "value": "KString" },
+                { "type": "S", "value": "" },
+                { "type": "S", "value": "" },
+                { "type": "S", "value": "Producer Perspective" }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "TimeMode" },
+                { "type": "S", "value": "enum" },
+                { "type": "S", "value": "" },
+                { "type": "S", "value": "" },
+                { "type": "I", "value": 11 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "TimeSpanStart" },
+                { "type": "S", "value": "KTime" },
+                { "type": "S", "value": "Time" },
+                { "type": "S", "value": "" },
+                { "type": "L", "value": 0 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "TimeSpanStop" },
+                { "type": "S", "value": "KTime" },
+                { "type": "S", "value": "Time" },
+                { "type": "S", "value": "" },
+                { "type": "L", "value": 46186158000 }
+              ]
+            },
+            { "name": "P",
+              "properties": [
+                { "type": "S", "value": "CustomFrameRate" },
+                { "type": "S", "value": "double" },
+                { "type": "S", "value": "Number" },
+                { "type": "S", "value": "" },
+                { "type": "D", "value": 24.000000 }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "Documents",
+      "children": [
+        { "name": "Count",
+          "properties": [
+            { "type": "I", "value": 1 }
+          ]
+        },
+        { "name": "Document",
+          "properties": [
+            { "type": "L", "value": 223578783 },
+            { "type": "S", "value": "Scene" },
+            { "type": "S", "value": "Scene" }
+          ],
+          "children": [
+            { "name": "Properties70",
+              "children": [
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "SourceObject" },
+                    { "type": "S", "value": "object" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "ActiveAnimStackName" },
+                    { "type": "S", "value": "KString" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "RootNode",
+              "properties": [
+                { "type": "L", "value": 0 }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "References",
+      "children": [
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "Definitions",
+      "children": [
+        { "name": "Version",
+          "properties": [
+            { "type": "I", "value": 100 }
+          ]
+        },
+        { "name": "Count",
+          "properties": [
+            { "type": "I", "value": 4 }
+          ]
+        },
+        { "name": "ObjectType",
+          "properties": [
+            { "type": "S", "value": "GlobalSettings" }
+          ],
+          "children": [
+            { "name": "Count",
+              "properties": [
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "ObjectType",
+          "properties": [
+            { "type": "S", "value": "Geometry" }
+          ],
+          "children": [
+            { "name": "Count",
+              "properties": [
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "PropertyTemplate",
+              "properties": [
+                { "type": "S", "value": "FbxMesh" }
+              ],
+              "children": [
+                { "name": "Properties70",
+                  "children": [
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "ColorRGB" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.800000 },
+                        { "type": "D", "value": 0.800000 },
+                        { "type": "D", "value": 0.800000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "BBoxMin" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "BBoxMax" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Primary Visibility" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Casts Shadows" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Receive Shadows" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "ObjectType",
+          "properties": [
+            { "type": "S", "value": "Model" }
+          ],
+          "children": [
+            { "name": "Count",
+              "properties": [
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "PropertyTemplate",
+              "properties": [
+                { "type": "S", "value": "FbxNode" }
+              ],
+              "children": [
+                { "name": "Properties70",
+                  "children": [
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "QuaternionInterpolate" },
+                        { "type": "S", "value": "enum" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationOffset" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationPivot" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingOffset" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingPivot" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationActive" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMin" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMax" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMinX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMinY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMinZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMaxX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMaxY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TranslationMaxZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationOrder" },
+                        { "type": "S", "value": "enum" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationSpaceForLimitOnly" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationStiffnessX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationStiffnessY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationStiffnessZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "AxisLen" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 10.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "PreRotation" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "PostRotation" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationActive" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMin" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMax" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMinX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMinY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMinZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMaxX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMaxY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "RotationMaxZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "InheritType" },
+                        { "type": "S", "value": "enum" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingActive" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMin" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMax" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMinX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMinY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMinZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMaxX" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMaxY" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ScalingMaxZ" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "GeometricTranslation" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "GeometricRotation" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "GeometricScaling" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampRangeX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampRangeY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampRangeZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampRangeX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampRangeY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampRangeZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampStrengthX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampStrengthY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MinDampStrengthZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampStrengthX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampStrengthY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MaxDampStrengthZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "PreferedAngleX" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "PreferedAngleY" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "PreferedAngleZ" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "LookAtProperty" },
+                        { "type": "S", "value": "object" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "UpVectorProperty" },
+                        { "type": "S", "value": "object" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Show" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "NegativePercentShapeSupport" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "DefaultAttributeIndex" },
+                        { "type": "S", "value": "int" },
+                        { "type": "S", "value": "Integer" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": -1 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Freeze" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "LODBox" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Lcl Translation" },
+                        { "type": "S", "value": "Lcl Translation" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Lcl Rotation" },
+                        { "type": "S", "value": "Lcl Rotation" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Lcl Scaling" },
+                        { "type": "S", "value": "Lcl Scaling" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Visibility" },
+                        { "type": "S", "value": "Visibility" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Visibility Inheritance" },
+                        { "type": "S", "value": "Visibility Inheritance" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 1 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "ObjectType",
+          "properties": [
+            { "type": "S", "value": "Material" }
+          ],
+          "children": [
+            { "name": "Count",
+              "properties": [
+                { "type": "I", "value": 1 }
+              ]
+            },
+            { "name": "PropertyTemplate",
+              "properties": [
+                { "type": "S", "value": "FbxSurfacePhong" }
+              ],
+              "children": [
+                { "name": "Properties70",
+                  "children": [
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ShadingModel" },
+                        { "type": "S", "value": "KString" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "Phong" }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "MultiLayer" },
+                        { "type": "S", "value": "bool" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "" },
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "EmissiveColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "EmissiveFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "AmbientColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.200000 },
+                        { "type": "D", "value": 0.200000 },
+                        { "type": "D", "value": 0.200000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "AmbientFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "DiffuseColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.800000 },
+                        { "type": "D", "value": 0.800000 },
+                        { "type": "D", "value": 0.800000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "DiffuseFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TransparentColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "TransparencyFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Opacity" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "NormalMap" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Bump" },
+                        { "type": "S", "value": "Vector3D" },
+                        { "type": "S", "value": "Vector" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "BumpFactor" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "DisplacementColor" },
+                        { "type": "S", "value": "ColorRGB" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "DisplacementFactor" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "VectorDisplacementColor" },
+                        { "type": "S", "value": "ColorRGB" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "VectorDisplacementFactor" },
+                        { "type": "S", "value": "double" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "SpecularColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.200000 },
+                        { "type": "D", "value": 0.200000 },
+                        { "type": "D", "value": 0.200000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "SpecularFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "Shininess" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 20.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ShininessExponent" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 20.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ReflectionColor" },
+                        { "type": "S", "value": "Color" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 },
+                        { "type": "D", "value": 0.000000 }
+                      ]
+                    },
+                    { "name": "P",
+                      "properties": [
+                        { "type": "S", "value": "ReflectionFactor" },
+                        { "type": "S", "value": "Number" },
+                        { "type": "S", "value": "" },
+                        { "type": "S", "value": "A" },
+                        { "type": "D", "value": 1.000000 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "Objects",
+      "children": [
+        { "name": "Geometry",
+          "properties": [
+            { "type": "L", "value": 970117589 },
+            { "type": "S", "value": "Cube\u0000\u0001Geometry" },
+            { "type": "S", "value": "Mesh" }
+          ],
+          "children": [
+            { "name": "Properties70",
+              "children": [
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "GeometryVersion",
+              "properties": [
+                { "type": "I", "value": 124 }
+              ]
+            },
+            { "name": "Vertices",
+              "properties": [
+                { "type": "d", "value": [1.000000, 1.000000, 1.000000, 1.000000, 1.000000, -1.000000, 1.000000, -1.000000, 1.000000, 1.000000, -1.000000, -1.000000, -1.000000, 1.000000, 1.000000, -1.000000, 1.000000, -1.000000, -1.000000, -1.000000, 1.000000, -1.000000, -1.000000, -1.000000] }
+              ]
+            },
+            { "name": "PolygonVertexIndex",
+              "properties": [
+                { "type": "i", "value": [0, 4, 6, -3, 3, 2, 6, -8, 7, 6, 4, -6, 5, 1, 3, -8, 1, 0, 2, -4, 5, 4, 0, -2] }
+              ]
+            },
+            { "name": "Edges",
+              "properties": [
+                { "type": "i", "value": [0, 1, 2, 3, 4, 6, 7, 10, 11, 12, 13, 16] }
+              ]
+            },
+            { "name": "LayerElementNormal",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ],
+              "children": [
+                { "name": "Version",
+                  "properties": [
+                    { "type": "I", "value": 101 }
+                  ]
+                },
+                { "name": "Name",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "MappingInformationType",
+                  "properties": [
+                    { "type": "S", "value": "ByPolygonVertex" }
+                  ]
+                },
+                { "name": "ReferenceInformationType",
+                  "properties": [
+                    { "type": "S", "value": "Direct" }
+                  ]
+                },
+                { "name": "Normals",
+                  "properties": [
+                    { "type": "d", "value": [0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 0.000000, 0.000000, -1.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 1.000000, 0.000000] }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "LayerElementUV",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ],
+              "children": [
+                { "name": "Version",
+                  "properties": [
+                    { "type": "I", "value": 101 }
+                  ]
+                },
+                { "name": "Name",
+                  "properties": [
+                    { "type": "S", "value": "UVMap" }
+                  ]
+                },
+                { "name": "MappingInformationType",
+                  "properties": [
+                    { "type": "S", "value": "ByPolygonVertex" }
+                  ]
+                },
+                { "name": "ReferenceInformationType",
+                  "properties": [
+                    { "type": "S", "value": "IndexToDirect" }
+                  ]
+                },
+                { "name": "UV",
+                  "properties": [
+                    { "type": "d", "value": [0.625000, 1.000000, 0.625000, 0.250000, 0.375000, 0.500000, 0.875000, 0.500000, 0.625000, 0.750000, 0.375000, 1.000000, 0.375000, 0.750000, 0.625000, 0.000000, 0.375000, 0.000000, 0.375000, 0.250000, 0.125000, 0.500000, 0.875000, 0.750000, 0.125000, 0.750000, 0.625000, 0.500000] }
+                  ]
+                },
+                { "name": "UVIndex",
+                  "properties": [
+                    { "type": "i", "value": [13, 3, 11, 4, 6, 4, 0, 5, 8, 7, 1, 9, 10, 2, 6, 12, 2, 13, 4, 6, 9, 1, 13, 2] }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "LayerElementMaterial",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ],
+              "children": [
+                { "name": "Version",
+                  "properties": [
+                    { "type": "I", "value": 101 }
+                  ]
+                },
+                { "name": "Name",
+                  "properties": [
+                    { "type": "S", "value": "" }
+                  ]
+                },
+                { "name": "MappingInformationType",
+                  "properties": [
+                    { "type": "S", "value": "AllSame" }
+                  ]
+                },
+                { "name": "ReferenceInformationType",
+                  "properties": [
+                    { "type": "S", "value": "IndexToDirect" }
+                  ]
+                },
+                { "name": "Materials",
+                  "properties": [
+                    { "type": "i", "value": [0] }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "Layer",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ],
+              "children": [
+                { "name": "Version",
+                  "properties": [
+                    { "type": "I", "value": 100 }
+                  ]
+                },
+                { "name": "LayerElement",
+                  "children": [
+                    { "name": "Type",
+                      "properties": [
+                        { "type": "S", "value": "LayerElementNormal" }
+                      ]
+                    },
+                    { "name": "TypedIndex",
+                      "properties": [
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": "LayerElement",
+                  "children": [
+                    { "name": "Type",
+                      "properties": [
+                        { "type": "S", "value": "LayerElementUV" }
+                      ]
+                    },
+                    { "name": "TypedIndex",
+                      "properties": [
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": "LayerElement",
+                  "children": [
+                    { "name": "Type",
+                      "properties": [
+                        { "type": "S", "value": "LayerElementMaterial" }
+                      ]
+                    },
+                    { "name": "TypedIndex",
+                      "properties": [
+                        { "type": "I", "value": 0 }
+                      ]
+                    },
+                    { "name": ""
+                    }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "Model",
+          "properties": [
+            { "type": "L", "value": 968980056 },
+            { "type": "S", "value": "Cube\u0000\u0001Model" },
+            { "type": "S", "value": "Mesh" }
+          ],
+          "children": [
+            { "name": "Version",
+              "properties": [
+                { "type": "I", "value": 232 }
+              ]
+            },
+            { "name": "Properties70",
+              "children": [
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Lcl Rotation" },
+                    { "type": "S", "value": "Lcl Rotation" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": -90.000009 },
+                    { "type": "D", "value": 0.000000 },
+                    { "type": "D", "value": 0.000000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Lcl Scaling" },
+                    { "type": "S", "value": "Lcl Scaling" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 100.000000 },
+                    { "type": "D", "value": 100.000000 },
+                    { "type": "D", "value": 100.000000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "DefaultAttributeIndex" },
+                    { "type": "S", "value": "int" },
+                    { "type": "S", "value": "Integer" },
+                    { "type": "S", "value": "" },
+                    { "type": "I", "value": 0 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "InheritType" },
+                    { "type": "S", "value": "enum" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "" },
+                    { "type": "I", "value": 1 }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": "MultiLayer",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ]
+            },
+            { "name": "MultiTake",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ]
+            },
+            { "name": "Shading",
+              "properties": [
+                { "type": "C", "value": true }
+              ]
+            },
+            { "name": "Culling",
+              "properties": [
+                { "type": "S", "value": "CullingOff" }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": "Material",
+          "properties": [
+            { "type": "L", "value": 360974551 },
+            { "type": "S", "value": "Material\u0000\u0001Material" },
+            { "type": "S", "value": "" }
+          ],
+          "children": [
+            { "name": "Version",
+              "properties": [
+                { "type": "I", "value": 102 }
+              ]
+            },
+            { "name": "ShadingModel",
+              "properties": [
+                { "type": "S", "value": "Phong" }
+              ]
+            },
+            { "name": "MultiLayer",
+              "properties": [
+                { "type": "I", "value": 0 }
+              ]
+            },
+            { "name": "Properties70",
+              "children": [
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "DiffuseColor" },
+                    { "type": "S", "value": "Color" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "AmbientColor" },
+                    { "type": "S", "value": "Color" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.050876 },
+                    { "type": "D", "value": 0.050876 },
+                    { "type": "D", "value": 0.050876 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "AmbientFactor" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.000000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "BumpFactor" },
+                    { "type": "S", "value": "double" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "D", "value": 0.000000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "SpecularColor" },
+                    { "type": "S", "value": "Color" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "SpecularFactor" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.250000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "Shininess" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 35.999999 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "ShininessExponent" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 35.999999 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "ReflectionColor" },
+                    { "type": "S", "value": "Color" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 },
+                    { "type": "D", "value": 0.800000 }
+                  ]
+                },
+                { "name": "P",
+                  "properties": [
+                    { "type": "S", "value": "ReflectionFactor" },
+                    { "type": "S", "value": "Number" },
+                    { "type": "S", "value": "" },
+                    { "type": "S", "value": "A" },
+                    { "type": "D", "value": 0.000000 }
+                  ]
+                },
+                { "name": ""
+                }
+              ]
+            },
+            { "name": ""
+            }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "Connections",
+      "children": [
+        { "name": "C",
+          "properties": [
+            { "type": "S", "value": "OO" },
+            { "type": "L", "value": 968980056 },
+            { "type": "L", "value": 0 }
+          ]
+        },
+        { "name": "C",
+          "properties": [
+            { "type": "S", "value": "OO" },
+            { "type": "L", "value": 970117589 },
+            { "type": "L", "value": 968980056 }
+          ]
+        },
+        { "name": "C",
+          "properties": [
+            { "type": "S", "value": "OO" },
+            { "type": "L", "value": 360974551 },
+            { "type": "L", "value": 968980056 }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    },
+    { "name": "Takes",
+      "children": [
+        { "name": "Current",
+          "properties": [
+            { "type": "S", "value": "" }
+          ]
+        },
+        { "name": ""
+        }
+      ]
+    }
+  ]
+}
