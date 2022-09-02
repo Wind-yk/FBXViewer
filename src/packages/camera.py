@@ -1,5 +1,5 @@
 import numpy
-from numpy import matrix
+from numpy import matrix, sqrt
 from enum import Enum
 
 class Axis(Enum):
@@ -10,22 +10,38 @@ class Axis(Enum):
 class Camera:
     def __init__(self):
 
+        # http://citmalumnes.upc.es/~julianp/lina/section-20.html
         self.transform =  matrix([
-            [1, 0, 0, 0],
-            [0, 1, 0, 0],
-            [0, 0, 1, 0],
-            [0, 0, 0, 1]
-        ])
+            [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
+            [         0, -4/sqrt(24), -1/sqrt(3), 4],\
+            [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
+            [         0,           0,          0, 1]])
 
-        self.focal = matrix([
-            [1, 0, 0, 0],  # f 0 0 0
-            [0, 1, 0, 0],  # 0 f 0 0
-            [0, 0, 1, 0],  # 0 0 1 0
-        ])
+        self.focal = 5
 
         self.angle  = [0,0,0]
         self.scale  = [0,0,0]
         self.center = [0,0,0]
+
+    @property
+    def focal(self) -> matrix:
+        return self._focal
+
+    @focal.setter
+    def focal(self, f: float):
+        self._focal = matrix([
+            [f, 0, 0, 0], 
+            [0, f, 0, 0],  
+            [0, 0, 1, 0], 
+        ])
+
+    @property
+    def transform(self) -> matrix:
+        return self._transform
+
+    @transform.setter
+    def transform(self, t: matrix):
+        self._transform = t
 
     def rotate(self, axis:Axis = Axis.X, angle:float = 0.0):
         

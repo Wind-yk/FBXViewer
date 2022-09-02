@@ -7,6 +7,7 @@ from typing import Union # this shouldn't be necessary for Python > 3.9
 # Project packages
 from packages.point import Point
 from packages.display import Display
+from packages.camera import Camera
 
 
 # TODO: add setter for each point of vertices
@@ -37,33 +38,6 @@ class Mesh:
         # print(self.vertices)
 
         self.transform_matrix = identity(4)  # identity matrix of size 4×4
-        # self.camera = matrix([
-        #     [ 1, 0, 0, 1],
-        #     [ 0, 1, 0, 0],
-        #     [ 0, 0, 1, 0],
-        #     [ 0, 0, 0, 1]
-        # ])
-
-        # http://citmalumnes.upc.es/~julianp/lina/section-20.html
-        
-        self.camera = matrix([
-            [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
-            [         0, -4/sqrt(24), -1/sqrt(3), 4],\
-            [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
-            [         0,           0,          0, 1]])
-        # self.camera = matrix([
-        # [1, 0, 0, 1],
-        # [0, 1, 0, 4],
-        # [0, 0, 1, 5],
-        # [0, 0, 0, 1]])
-
-        self.focal = matrix([
-            [5, 0, 0, 0], # f 0 0 0
-            [0, 5, 0, 0], # 0 f 0 0
-            [0, 0, 1, 0], # 0 0 1 0
-        ])
-
-        self.applyTransform(shift, angle, scale)
 
         self.show = True
         self.color = color
@@ -89,7 +63,6 @@ class Mesh:
         ])
         return scale_matrix
 
-
     def _shift_matrix(self) -> matrix:
         """
         Get the matrix that shifts all components by the vector `shift`.
@@ -108,7 +81,6 @@ class Mesh:
             [0, 0, 0, 1]
         ])
         return shift_matrix
-
 
     def _rotation_matrix(self) -> matrix:
         """
@@ -136,15 +108,14 @@ class Mesh:
 
         return rotation_matrix
 
-
-    # TODO: add camera as parameter
-    def _to2D(self) -> matrix:
+    # DONE: add camera as parameter
+    def _to2D(self, camera: Camera) -> matrix:
         """
         Return the vertices mapped to 2D.
         """
         # print(self.vertices)
 
-        mapped_points = self.focal @ inv(self.camera) @ self.transform_matrix @ self.vertices
+        mapped_points = camera.focal @ inv(camera.transform) @ self.transform_matrix @ self.vertices
         # print('-'*30, 'mapped points 1')
         # print(self.transform_matrix @ self.vertices)
         # print('-'*30, 'mapped points 2')
@@ -219,7 +190,6 @@ class Mesh:
     def edges(self, values: list):
         self._edges = values
 
-
     @property
     def shift(self) -> Point:
         return self._shift
@@ -271,7 +241,6 @@ class Mesh:
             self._scale = Point(*scale)
         else:
             raise TypeError("scale must be set using one of: float, int, list, tuple, Point.")
-
 
     @property
     def show(self) -> bool:
@@ -342,9 +311,10 @@ class Mesh:
 
     def applyTransform(
         self,
+        camera: Camera,
         shift: Union[Point, float, int, list, tuple] = 0,
         angle: Union[Point, float, int, list, tuple] = 0,
-        scale: Union[Point, float, int, list, tuple] = 1.
+        scale: Union[Point, float, int, list, tuple] = 1
     ) -> None:
         """
         Update the 2D Vertices. First shift, then rotate and at the end scale.
@@ -367,4 +337,4 @@ class Mesh:
         scale_matrix    = self._scale_matrix()
         self.transform_matrix = scale_matrix @ rotation_matrix @ shift_matrix
         
-        self._2DVertices = self._to2D()
+        self._2DVertices = self._to2D(camera)
