@@ -2,6 +2,7 @@ import os
 import json
 from math import radians
 from pathlib import Path
+from itertools import chain
 
 # Project defined classes
 from packages.mesh import Mesh
@@ -138,19 +139,32 @@ def list2edges(l: list):
     `[0, 4, 6, -3]` is converted to `[(0, 4), (4, 6), (6, 2), (2, 0)]`.
     """
     i = 0
-    out = []
     first_index = 0
+    dict = {}
+
     while i < len(l)-1:
         x = l[i]   if l[i]   >= 0 else -l[i]   - 1
         y = l[i+1] if l[i+1] >= 0 else -l[i+1] - 1
-        out.append((x,y))
+
+        if min(x,y) not in dict.keys():
+            dict[min(x,y)] = [(min(x,y), max(x,y))]
+        else:
+            if(min(x,y), max(x,y)) not in dict[min(x,y)]:
+                dict[min(x,y)].append((min(x,y), max(x,y))) 
+
         if l[i+1] < 0:
-            out.append((y,l[first_index]))
+            if min(l[first_index],y) not in dict.keys():
+                dict[min(l[first_index],y)] = [(min(l[first_index],y), max(l[first_index],y))]
+            else:
+                if(min(l[first_index],y), max(l[first_index],y)) not in dict[min(l[first_index],y)]:
+                    dict[min(l[first_index],y)].append((min(l[first_index],y), max(l[first_index],y))) 
+            
             i += 2
             first_index = i
         else:
             i += 1
-    return out
+
+    return list(chain(*dict.values()))
 
 def getProperties(objs: dict):
     """
