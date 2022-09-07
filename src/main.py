@@ -10,15 +10,15 @@ CONFIG_PATH = "config/config.yaml"
 
 if __name__ == '__main__':
 
-    from packages.fbx import preprocessFBXjson
-    import json
+    # from packages.fbx import preprocessFBXjson
+    # import json
 
-    with open('data/med/cube2.json') as f:
-        data = json.load(f)
-        data = preprocessFBXjson(data)
+    # with open('data/med/cube2.json') as f:
+    #     data = json.load(f)
+    #     data = preprocessFBXjson(data)
     
-    with open('data/int/temp.json', 'w') as f:
-        json.dump(data, f, indent=2)
+    # with open('data/int/temp.json', 'w') as f:
+    #     json.dump(data, f, indent=2)
 
     with open(CONFIG_PATH) as f:
         config = yaml.load(f, Loader=SafeLoader)["configuration"]

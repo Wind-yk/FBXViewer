@@ -7,6 +7,8 @@ from numpy import matrix, size, zeros
 from matplotlib.widgets import TextBox
 from packages.camera import Camera
 from random import random
+from matplotlib import pyplot as plt
+import numpy as np
 
 class Display:
     """Displays several geometric bodies"""
@@ -124,26 +126,29 @@ class Display:
         pointsY = zeros(2)
         printed_edges = [] # tp print text
         
-        for mesh in self.meshes:
-            for edge in mesh.edges:
-                # get vertex
-                pointsX[0] = mesh.get2DVertex(edge[0])[0]
-                pointsX[1] = mesh.get2DVertex(edge[1])[0]
-                pointsY[0] = mesh.get2DVertex(edge[0])[1]
-                pointsY[1] = mesh.get2DVertex(edge[1])[1]
+        import time
+        start = time.time()
 
-                self.defaultPlt.plot(pointsX,pointsY, mesh.color+'-')
-                
-                '''
-                # draw text
-                sep = .1 # separation
-                if edge[0] not in printed_edges:
-                    self.defaultPlt.text(pointsX[0]+(2*random()-1)*sep, pointsY[0]+(2*random()-1)*sep, edge[0], fontsize=12, color='r')
-                    printed_edges.append(edge[0])
-                if edge[1] not in printed_edges:
-                    self.defaultPlt.text(pointsX[1]+(2*random()-1)*sep, pointsY[1]+(2*random()-1)*sep, edge[1], fontsize=12, color='r')
-                    printed_edges.append(edge[1])
-                '''
+        for mesh in self.meshes:
+
+            x = np.asarray(mesh._2DVertices[0,:]).reshape(-1)
+            y = np.asarray(mesh._2DVertices[1,:]).reshape(-1)
+
+            self.defaultPlt.plot(x[np.array(mesh.edges).T], y[np.array(mesh.edges).T], mesh.color+'-')
+
+        #         '''
+        #         # draw text
+        #         sep = .1 # separation
+        #         if edge[0] not in printed_edges:
+        #             self.defaultPlt.text(pointsX[0]+(2*random()-1)*sep, pointsY[0]+(2*random()-1)*sep, edge[0], fontsize=12, color='r')
+        #             printed_edges.append(edge[0])
+        #         if edge[1] not in printed_edges:
+        #             self.defaultPlt.text(pointsX[1]+(2*random()-1)*sep, pointsY[1]+(2*random()-1)*sep, edge[1], fontsize=12, color='r')
+        #             printed_edges.append(edge[1])
+        #         '''
+
+        end = time.time()
+        print("The time of execution of above program is :", (end-start) * 10**3, "ms")
 
     def add_mesh(self,mesh):
         self.meshes.append(mesh)
