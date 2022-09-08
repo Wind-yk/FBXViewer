@@ -189,7 +189,7 @@ def getProperties(objs: dict):
         sh, an, sc = 0, 0, 1
         for prop in model['Properties70']['P']:
             if prop['S'][0] == 'Lcl Translation':
-                sh = prop['D']
+                sh = [shift/100 for shift in prop['D']]
             elif prop['S'][0] == 'Lcl Rotation':
                 an = [radians(angle) for angle in prop['D']]
             elif prop['S'][0] == 'Lcl Scaling':
