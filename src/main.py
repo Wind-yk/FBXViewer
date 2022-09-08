@@ -25,6 +25,7 @@ if __name__ == '__main__':
     list_mesh = readFBX(**config['readFBX'])
     display = Display()
     for mesh in list_mesh:
+        print(mesh.shift)
         mesh.send2render(display)
     display.start()
 
