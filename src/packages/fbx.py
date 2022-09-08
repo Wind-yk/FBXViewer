@@ -29,7 +29,7 @@ def fbx2json(input:str, output:str, force:bool=False):
             raise FileExistsError(f"{output} already exists.")
 
     # Complete the command with input file name
-    input = "readFbxInfo.exe " + input + " >> " + output
+    input = "readFbxInfo.exe " + input + " >> " + str(output)
     # Execute the readFbxInfo.exe
     os.system(input)
 

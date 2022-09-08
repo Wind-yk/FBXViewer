@@ -6,5 +6,5 @@ configuration:
   version: 0.001
 
   readFBX:
-    fbx_path: ../../data/int/sphere.fbx
+    fbx_path: ../../data/int/cube2.fbx
     overwrite: false
