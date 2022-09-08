@@ -115,6 +115,9 @@ class Point:
         else:
             raise TypeError("Can only multiply Points with Points, lists or tuples of length 3.")
 
+    def __neg__(self):
+        return Point(-self.x, -self.y, -self.z)
+
 
     def __len__(self):
         return 3

@@ -1,43 +1,26 @@
-import numpy
-from numpy import matrix, sqrt, sin , cos, identity
-from enum import Enum
+from numpy import matrix, sin , cos, identity
 from typing import Union
 
 from packages.point import Point
 
-class Axis(Enum):
-        X = 0
-        Y = 1
-        Z = 2
 
 class Camera:
-    def __init__(self):
-
+    def __init__(self, shift=[0,0,-4], focal=6, angle=0, scale=0):
         # http://citmalumnes.upc.es/~julianp/lina/section-20.html
-        
-        '''
-        self.transform =  matrix([
-            [-2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 3],
-            [         0, -4/sqrt(24), -1/sqrt(3), 4],\
-            [ 2/sqrt(8), -2/sqrt(24),  1/sqrt(3), 5],
-            [         0,           0,          0, 1]])
-        '''
-        self.transform = identity(4)
-
-        self.shift =  [0,0,-4]
-
-        self.focal = 6
-
-        self.angle  = [0,0,0]
-        self.scale  = [0,0,0]
-        self.center = [0,0,0]
+        self.shift = shift
+        self.focal = focal
+        self.angle = angle
+        self.scale = scale
 
         # Init transform
+        self.transform = identity(4)
         self.applyTransform()
+
 
     @property
     def focal(self) -> matrix:
         return self._focal
+
 
     @focal.setter
     def focal(self, f: float):
@@ -47,17 +30,21 @@ class Camera:
             [0, 0, 1, 0], 
         ])
 
+
     @property
     def transform(self) -> matrix:
         return self._transform
+
 
     @transform.setter
     def transform(self, t: matrix):
         self._transform = t
 
+
     @property
     def angle(self) -> Point:
         return self._angle
+
 
     @angle.setter
     def angle(self, angle: Union[Point, float, int, list, tuple]):
@@ -70,9 +57,11 @@ class Camera:
         else:
             raise TypeError("angle must be set using one of: float, int, list, tuple, Point.")
 
+
     @property
     def shift(self) -> Point:
         return self._shift
+
 
     @shift.setter
     def shift(self, shift: Union[Point, float, int, list, tuple]):
@@ -84,6 +73,7 @@ class Camera:
             self._shift = Point(*shift)
         else:
             raise TypeError("center must be set using one of: float, int, list, tuple, Point.")
+
 
     def _rotation_matrix(self) -> matrix:
         """
@@ -111,6 +101,7 @@ class Camera:
 
         return rotation_matrix
 
+
     def _shift_matrix(self) -> matrix:
         """
         Get the matrix that shifts all components by the vector `shift`.
@@ -130,9 +121,12 @@ class Camera:
         ])
         return shift_matrix
 
-    def applyTransform(self,
+
+    def applyTransform(
+        self,
         angle: Union[Point, float, int, list, tuple] = 0,
-        shift: Union[Point, float, int, list, tuple] = 0):
+        shift: Union[Point, float, int, list, tuple] = 0
+    ):
         
         self.angle += angle
         self.shift += shift
