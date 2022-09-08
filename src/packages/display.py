@@ -11,7 +11,6 @@ from matplotlib.widgets import Button, Slider
 
 import matplotlib.pyplot as plt
 
-
 class Display:
     """Displays several geometric bodies"""
 
@@ -32,29 +31,34 @@ class Display:
 
     def _slider_movement_x_callback(self, event):
         """Test slider callback func"""
-        for mesh in self.meshes:
-            movement_val = self.mov_x_slider.val - self.camera.shift.x
-            self.camera.applyTransform(shift=[movement_val,0,0])
+        movement_val = self.mov_x_slider.val - self.camera.shift.x
+        self.camera.applyTransform(shift=[movement_val,0,0])
+        for mesh in self.meshes:    
             mesh.applyTransform(self.camera)
         self._plotMeshes()
 
     def _slider_rotation_y_callback(self, event):
         """Test slider callback func"""
-        for mesh in self.meshes:
-            rotation_angle = pi/180 * self.rot_y_slider.val - self.camera.angle.y
-            self.camera.applyTransform(angle=[0,rotation_angle,0])
+        rotation_angle = pi/180 * self.rot_y_slider.val - self.camera.angle.y
+        self.camera.applyTransform(angle=[0,rotation_angle,0])
+        for mesh in self.meshes:  
             mesh.applyTransform(self.camera)
         self._plotMeshes()
 
     def _slider_rotation_x_callback(self, event):
         """Test slider callback func"""
-        for mesh in self.meshes:
-            rotation_angle = pi/180 * self.rot_x_slider.val - self.camera.angle.x
-            self.camera.applyTransform(angle=[rotation_angle,0,0])
+        rotation_angle = pi/180 * self.rot_x_slider.val - self.camera.angle.x
+
+        temp_shift = self.camera.shift
+
+        self.camera.applyTransform(shift = (-temp_shift.x,-temp_shift.y,-temp_shift.z), angle=[rotation_angle,0,0])
+
+        self.camera.applyTransform(shift = temp_shift)
+
+        for mesh in self.meshes: 
             mesh.applyTransform(self.camera)
         self._plotMeshes()
 
-    
     def _plotMeshes(self):
         """Update mehes with current camera transform, then show in the canvas."""
         # Clear canvas
