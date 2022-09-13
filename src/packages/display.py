@@ -1,4 +1,5 @@
 from time import time
+from traceback import print_tb
 # from random import random
 # from telnetlib import X3PAD
 # from tracemalloc import start
@@ -18,10 +19,14 @@ class Display:
     def __init__(self):
         self.meshes = []
         self.camera = Camera()
+
         self.winSize = [5, 5]
+
         self.rot_x_slider:Slider()
-        self.rot_y_slider:Slider()
+        self.rot_z_slider:Slider()
         self.mov_x_slider:Slider()
+        self.focal_slider:Slider()
+
         self.started = False
         self.fig, self.defaultPlt = plt.subplots()
 
@@ -37,10 +42,18 @@ class Display:
             mesh.applyTransform(self.camera)
         self._plotMeshes()
 
-    def _slider_rotation_y_callback(self, event):
+    def _slider_rotation_z_callback(self, event):
         """Test slider callback func"""
-        rotation_angle = pi/180 * self.rot_y_slider.val - self.camera.angle.y
-        self.camera.applyTransform(angle=[0,rotation_angle,0])
+        rotation_angle = pi/180 * self.rot_z_slider.val - self.camera.angle.z
+
+        temp_shift = self.camera.shift
+
+        self.camera.applyTransform(shift = (-temp_shift.x,-temp_shift.y,-temp_shift.z), angle=[0,0,rotation_angle])
+
+        self.camera.applyTransform(shift = temp_shift)
+
+        #self.camera.applyTransform(angle=[0,rotation_angle,0])
+
         for mesh in self.meshes:  
             mesh.applyTransform(self.camera)
         self._plotMeshes()
@@ -58,6 +71,14 @@ class Display:
         for mesh in self.meshes: 
             mesh.applyTransform(self.camera)
         self._plotMeshes()
+
+    def _slider_focal_callback(self, event):
+        """Test slider callback func"""
+        self.camera.focal = self.focal_slider.val
+        for mesh in self.meshes:    
+            mesh.applyTransform(self.camera)
+        self._plotMeshes()
+
 
     def _plotMeshes(self):
         """Update mehes with current camera transform, then show in the canvas."""
@@ -80,7 +101,6 @@ class Display:
             # self.defaultPlt.text(pointsX[0]+(2*random()-1)*sep, pointsY[0]+(2*random()-1)*sep, edge[0], fontsize=12, color='r')
         print(f"Drawing time: {(time()-start)*1e3:.2f} ms.")
 
-
     # ------------------------- methods ------------------------- #
     def start(self):
         # Configurate window size
@@ -99,9 +119,20 @@ class Display:
             label="Camera mov x",
             valmin=-10.0,
             valmax=10.0,
-            valinit=0.0,
+            valinit=0.0
         )
         self.mov_x_slider.on_changed(self._slider_movement_x_callback)
+
+        # Create test slider focal
+        axSliderFocal = plt.axes([0.35, 0.95, 0.5, 0.03])  
+        self.focal_slider = Slider(
+            ax=axSliderFocal,
+            label="Camera focal",
+            valmin=-20.0,
+            valmax=20.0,
+            valinit=self.camera.focal[0,0]
+        )
+        self.focal_slider.on_changed(self._slider_focal_callback)
 
         # Create test slider rot X
         axSliderRotX = plt.axes([0.1, 0.3, 0.03, 0.5])  
@@ -115,16 +146,16 @@ class Display:
         )
         self.rot_x_slider.on_changed(self._slider_rotation_x_callback)
 
-        # Create test slider rot Y
-        axSliderRotY = plt.axes([0.35, 0.1, 0.5, 0.03])  
-        self.rot_y_slider = Slider(
-            ax=axSliderRotY,
-            label="Camera rot y",
+        # Create test slider rot Z
+        axSliderRotZ = plt.axes([0.35, 0.1, 0.5, 0.03])  
+        self.rot_z_slider = Slider(
+            ax=axSliderRotZ,
+            label="Camera rot z",
             valmin=0.0,
             valmax=360.0,
             valinit=0.0,
         )
-        self.rot_y_slider.on_changed(self._slider_rotation_y_callback)
+        self.rot_z_slider.on_changed(self._slider_rotation_z_callback)
 
         # Start render
         plt.show(block=True)

@@ -7,5 +7,4 @@ configuration:
 
   readFBX:
     fbx_path: ../../data/int/cube2.fbx
-    json_path: ../../data/med/cube2.json
     overwrite: false

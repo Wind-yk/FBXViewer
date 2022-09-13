@@ -29,7 +29,7 @@ def fbx2json(input:str, output:str, force:bool=False):
             raise FileExistsError(f"{output} already exists.")
 
     # Complete the command with input file name
-    input = "readFbxInfo.exe " + input + " >> " + output
+    input = "readFbxInfo.exe " + input + " >> " + str(output)
     # Execute the readFbxInfo.exe
     os.system(input)
 
@@ -230,7 +230,7 @@ def readFBX(fbx_path: str, json_path: str=None, overwrite: bool=False):
     # Convert fbx file to json
     if json_path is None:
         json_path = Path(fbx_path)
-        json_path = json_path.parent.parent / "med" / json_path.stem + ".json"
+        json_path = (json_path.parent.parent / "med" / json_path.stem).with_suffix('.json')
 
     try:
         fbx2json(fbx_path, json_path, overwrite)
