@@ -290,6 +290,14 @@ class Mesh:
             raise TypeError(f"Index must be int, {type(i)} is given.")
         return self._2DVertices[:,i]
 
+    def get2DVertexX(self):
+        """Given index `i`, return the `i`th mapped point."""
+        return self._2DVertices[0,:]
+
+    def get2DVertexY(self):
+        """Given index `i`, return the `i`th mapped point."""
+        return self._2DVertices[1,:]
+
 
     def getVertex(self, i: int):
         """Given index `i`, return the i'th vertex."""
