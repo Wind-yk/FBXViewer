@@ -1,10 +1,19 @@
-
 configuration:
 
   name: "3D project"
 
-  version: 0.001
+  version: 0.1.0
 
   readFBX:
-    fbx_path: ../../data/int/cube2.fbx
+    fbx_path: ../../data/int/output.fbx
     overwrite: false
+  
+  Camera:
+    shift: [0,0,-4]
+    focal: 12
+    angle: [100,200,300]
+    scale: 1
+
+  Display:
+    winSize: [5, 5]
+
