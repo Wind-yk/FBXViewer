@@ -16,16 +16,20 @@ class Display:
     """Displays several geometric bodies"""
 
     # ------------------------- internal methods ------------------------- #
-    def __init__(self):
-        self.meshes = []
-        self.camera = Camera()
+    def __init__(
+        self, 
+        meshes,
+        camera:Camera,
+        winSize:list
+    ):
+        self.meshes = meshes
+        self.camera = camera
+        self.winSize = winSize
 
-        self.winSize = [5, 5]
-
-        self.rot_x_slider:Slider()
-        self.rot_z_slider:Slider()
-        self.mov_x_slider:Slider()
-        self.focal_slider:Slider()
+        self._rot_x_slider:Slider()
+        self._rot_z_slider:Slider()
+        self._mov_x_slider:Slider()
+        self._focal_slider:Slider()
 
         self.started = False
         self.fig, self.defaultPlt = plt.subplots()
@@ -36,7 +40,7 @@ class Display:
 
     def _slider_movement_x_callback(self, event):
         """Test slider callback func"""
-        movement_val = self.mov_x_slider.val - self.camera.shift.x
+        movement_val = self._mov_x_slider.val - self.camera.shift.x
         self.camera.applyTransform(shift=[movement_val,0,0])
         for mesh in self.meshes:    
             mesh.applyTransform(self.camera)
@@ -44,7 +48,7 @@ class Display:
 
     def _slider_rotation_z_callback(self, event):
         """Test slider callback func"""
-        rotation_angle = pi/180 * self.rot_z_slider.val - self.camera.angle.z
+        rotation_angle = pi/180 * self._rot_z_slider.val - self.camera.angle.z
 
         temp_shift = self.camera.shift
 
@@ -60,7 +64,7 @@ class Display:
 
     def _slider_rotation_x_callback(self, event):
         """Test slider callback func"""
-        rotation_angle = pi/180 * self.rot_x_slider.val - self.camera.angle.x
+        rotation_angle = pi/180 * self._rot_x_slider.val - self.camera.angle.x
 
         temp_shift = self.camera.shift
 
@@ -74,7 +78,7 @@ class Display:
 
     def _slider_focal_callback(self, event):
         """Test slider callback func"""
-        self.camera.focal = self.focal_slider.val
+        self.camera.focal = self._focal_slider.val
         for mesh in self.meshes:    
             mesh.applyTransform(self.camera)
         self._plotMeshes()
@@ -92,6 +96,8 @@ class Display:
         # Draw points and vertices
         start = time()
         for mesh in self.meshes:
+            if not mesh.show: 
+                continue
             edges = array(mesh.edges).T
             x = asarray(mesh.get2DVertexX()).reshape(-1)
             y = asarray(mesh.get2DVertexY()).reshape(-1)
@@ -113,49 +119,45 @@ class Display:
         self._plotMeshes()
      
         # Create test slider mov X
-        axSliderMovX = plt.axes([0.35, 0.92, 0.5, 0.03])  
-        self.mov_x_slider = Slider(
-            ax=axSliderMovX,
+        self._mov_x_slider = Slider(
+            ax=plt.axes([0.35, 0.92, 0.5, 0.03]),
             label="Camera mov x",
             valmin=-10.0,
             valmax=10.0,
-            valinit=0.0
+            valinit=self.camera.shift.x
         )
-        self.mov_x_slider.on_changed(self._slider_movement_x_callback)
+        self._mov_x_slider.on_changed(self._slider_movement_x_callback)
 
         # Create test slider focal
-        axSliderFocal = plt.axes([0.35, 0.95, 0.5, 0.03])  
-        self.focal_slider = Slider(
-            ax=axSliderFocal,
+        self._focal_slider = Slider(
+            ax=plt.axes([0.35, 0.95, 0.5, 0.03]),
             label="Camera focal",
-            valmin=-20.0,
+            valmin=0,
             valmax=20.0,
             valinit=self.camera.focal[0,0]
         )
-        self.focal_slider.on_changed(self._slider_focal_callback)
+        self._focal_slider.on_changed(self._slider_focal_callback)
 
         # Create test slider rot X
-        axSliderRotX = plt.axes([0.1, 0.3, 0.03, 0.5])  
-        self.rot_x_slider = Slider(
-            ax=axSliderRotX,
+        self._rot_x_slider = Slider(
+            ax=plt.axes([0.1, 0.3, 0.03, 0.5]),
             label="Camera rot x",
             valmin=0.0,
             valmax=360.0,
-            valinit=0.0,
+            valinit=self.camera.angle.x,
             orientation="vertical"
         )
-        self.rot_x_slider.on_changed(self._slider_rotation_x_callback)
+        self._rot_x_slider.on_changed(self._slider_rotation_x_callback)
 
         # Create test slider rot Z
-        axSliderRotZ = plt.axes([0.35, 0.1, 0.5, 0.03])  
-        self.rot_z_slider = Slider(
-            ax=axSliderRotZ,
+        self._rot_z_slider = Slider(
+            ax=plt.axes([0.35, 0.1, 0.5, 0.03]),
             label="Camera rot z",
             valmin=0.0,
             valmax=360.0,
-            valinit=0.0,
+            valinit=self.camera.angle.z,
         )
-        self.rot_z_slider.on_changed(self._slider_rotation_z_callback)
+        self._rot_z_slider.on_changed(self._slider_rotation_z_callback)
 
         # Start render
         plt.show(block=True)

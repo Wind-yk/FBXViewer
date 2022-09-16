@@ -5,7 +5,7 @@ from packages.point import Point
 
 
 class Camera:
-    def __init__(self, shift=[0,0,-4], focal=12, angle=0, scale=0):
+    def __init__(self, shift, focal, angle, scale):
         # http://citmalumnes.upc.es/~julianp/lina/section-20.html
         self.shift = shift
         self.focal = focal
