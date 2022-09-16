@@ -1,4 +1,3 @@
-
 # Architecture
 
 The folders and files of this project are organized as follows:
@@ -25,7 +24,7 @@ The folders and files of this project are organized as follows:
  ┗━📜environment.yaml
 ```
 
-![diagram](3D_diagram.jpg)
+![diagram](../3D_diagram.jpg)
 
 
 

@@ -6,20 +6,26 @@ This is the description of this project ;).
 
 ## Build
 
-1. Install conda or miniconda.
-2. From terminal and under the `3D` project folder, use:
+1. Clone the repository to your local disc with following command:
+
+```bash
+git clone https://github.com/Wind-yk/3D.git
+```
+
+2. Install conda or miniconda.
+3. From terminal and under the `3D` project folder, use:
 
 ```bash
 conda env create -f environment.yaml
 ```
 
-3. After the installation, activate the Python environment with:
+4. After the installation, activate the Python environment with:
 
 ```bash
 conda activate 3D
 ```
 
-4. Check that you are running with the right interpreter from your IDE.
+5. Check that you are running with the right interpreter from your IDE.
 
 ## Quickstart
 
@@ -27,11 +33,44 @@ Include here some code, screenshots or gifs.
 
 ### Configuration
 
-Configure yaml file.
+Configure yaml file inside the config folder. It is primarily as follows:
+
+```bash
+configuration:
+
+  name: "3D project"
+
+  version: 0.1.0
+
+  readFBX:
+    fbx_path: ../../data/int/output.fbx
+    overwrite: false
+  
+  Camera:
+    shift: [0,0,-4]
+    focal: 12
+    angle: [100,200,300]
+    scale: 1
+
+  Display:
+    winSize: [5, 5]
+```
+
+You can edit the path to the fbx file by changing the "fbx_path" that is under the section of "readFBX"; just keep in mind that the
+operating directory is 3D/src/main.py. The predetermined fbx_path is set to be a sphere's graph that is included within the package.
+
+The "overwrite" parameter is set to be "false" since it won't modify the already existing json output file.
+
+For more needs you can even modify the camera or the output windows size.
+
+Remember that you shall **only** modify this "config.yaml" file. 
 
 ### Rendering
 
-Some gifs.
+The units of the output windows is the same as the default unit in the fbx file. The red line marked inside each bar is the
+initial value of that parameter when first running the program. You can retouch these values to rotate, move, zoom in or zoom out the graph.
+
+![](https://github.com/Wind-yk/3D/blob/main/docs/sphere.gif)
 
 ## References and documentation
 
