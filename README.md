@@ -1,6 +1,6 @@
 # 3D
 
-## Desription
+## Description
 
 This is the description of this project ;).
 
@@ -29,8 +29,6 @@ conda activate 3D
 
 ## Quickstart
 
-Include here some code, screenshots or gifs.
-
 ### Configuration
 
 Configure yaml file inside the config folder. It is primarily as follows:
@@ -58,6 +56,11 @@ configuration:
 
 You can edit the path to the fbx file by changing the "fbx_path" that is under the section of "readFBX"; just keep in mind that the
 operating directory is 3D/src/main.py. The predetermined fbx_path is set to be a sphere's graph that is included within the package.
+
+**How to change the input FBX file:** 
+1. Add the fxb file into the path "./../data/int/". 
+2. Replace the content in "fbx_path" with "./../data/int/filename.fbx", where filename.fbx is the name of your input fbx file.
+3. Save the modifications.
 
 The "overwrite" parameter is set to be "false" since it won't modify the already existing json output file.
 
