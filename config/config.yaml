@@ -5,9 +5,9 @@ configuration:
   version: 0.1.0
 
   readFBX:
-    fbx_path: ../../data/int/output.fbx
+    fbx_path: ../../data/int/cube2.fbx
     overwrite: false
-  
+
   Camera:
     shift: [0,0,-4]
     focal: 12
@@ -16,4 +16,3 @@ configuration:
 
   Display:
     winSize: [5, 5]
-

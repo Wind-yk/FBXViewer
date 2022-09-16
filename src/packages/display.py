@@ -99,8 +99,8 @@ class Display:
             if not mesh.show: 
                 continue
             edges = array(mesh.edges).T
-            x = asarray(mesh._2DVertices[0,:]).reshape(-1)
-            y = asarray(mesh._2DVertices[1,:]).reshape(-1)
+            x = asarray(mesh.get2DVertexX()).reshape(-1)
+            y = asarray(mesh.get2DVertexY()).reshape(-1)
             self.defaultPlt.plot(x[edges], y[edges], mesh.color+'-')
             # # Draw point numbers
             # sep = .1 # separation
