@@ -70,7 +70,7 @@ Remember that you shall **only** modify this "config.yaml" file.
 The units of the output windows is the same as the default unit in the fbx file. The red line marked inside each bar is the
 initial value of that parameter when first running the program. You can retouch these values to rotate, move, zoom in or zoom out the graph.
 
-![](https://github.com/Wind-yk/3D/blob/main/docs/sphere.gif)
+![](docs/sphere.gif)
 
 ## References and documentation
 
